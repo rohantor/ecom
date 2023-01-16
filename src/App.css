@@ -49,7 +49,7 @@
   display: grid;
   gap: 50px;
   grid-template-columns: auto auto auto;
- 
+    min-width: 100vw;
   padding: 10px;
 }
 .card_outer {
@@ -60,49 +60,53 @@
   border-radius: 30px;
   box-shadow: 8px 9px #dfc5c587;
 }
-.title{
-
+.title {
   align-self: center;
-  width:90%
+  width: 90%;
 }
-.Card_img{
-
+.Card_img {
   max-width: 100%;
 }
-.blurBox{
-  position: absolute;
+.blurBox {
+  position: fixed;
   z-index: 1;
-left: 50%;
-top: 50%;
-transform: translate(-50%, -50%);
-border: 5px solid #FFFF00;
-background-color: rgba(49,49,49,0.9); /* Fallback color */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 5px solid #ffff00;
+  background-color: rgba(49, 49, 49, 0.9); /* Fallback color */
 }
 .OuterModal {
-  
   position: absolute;
   z-index: 1;
-left: 50%;
-top: 50%;
-transform: translate(-50%, -50%);
-/* border: 5px solid #FFFF00; */
-background-color: rgb(241, 241, 241); /* Fallback color */
-/* background-color: rgba(0,0,0,0.9); */
- /* Black w/ opacity */
- border-radius: 43px;
-padding: 10px;
-width: 600px;
-height: 400px;
-
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  /* border: 5px solid #FFFF00; */
+  background-color: rgb(241, 241, 241); /* Fallback color */
+  /* background-color: rgba(0,0,0,0.9); */
+  /* Black w/ opacity */
+  border-radius: 43px;
+  padding: 10px;
+  width: 600px;
+  height: 400px;
 }
 /* body > *:not(#MyModal) {
   background: #ffd83c;
   filter: blur(3px);
 } */
-.blur{
+.blur {
   filter: blur(3px);
 }
-.RemoveScrollbar
-{
-  overflow: hidden; 
+.RemoveScrollbar {
+  overflow: hidden;
+}
+
+.GridOnCart{
+ 
+    display: grid;
+    gap: 9px;
+    grid-template-columns: auto  auto;
+    max-width: 59vw;
+    padding: 6px;
 }

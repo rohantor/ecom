@@ -1,20 +1,28 @@
-import React, { Dispatch, SetStateAction } from 'react'
-import Button from '@mui/material/Button'
+import React, { Dispatch, MouseEventHandler, SetStateAction,useState } from 'react'
+import Modal from './Modal'
 interface ProductInterface {
   title: string
   url: string
   description: string
   id: number
-  removedNew: Array<number>
-  setRemoved: (value: any) => void
+ 
 }
-
+interface ProductWithFuncInterface extends ProductInterface {
+  setRemoved: (value: any) => void
+  AddToLocalStorage: (
+    value: ProductInterface
+  ) => void
+}
 interface PropsInterface {
-  product: ProductInterface
+  product: ProductWithFuncInterface
 }
 export default function Card(props: PropsInterface) {
-  const { title, url, description, id, setRemoved, removedNew } = props.product
+  const { title, url, description, id, setRemoved, AddToLocalStorage } =
+    props.product
+
   const [deleteStatus, setDeleteStatus] = React.useState(false)
+  const [modalPos, setModalPos] = React.useState(false)
+
   return (
     <>
       <div className='card_outer' id={id.toString()}>
@@ -40,23 +48,33 @@ export default function Card(props: PropsInterface) {
           src={url}
           alt='Logo'
           onClick={() => {
-            // setModalPos((old) => !old);
+            setModalPos((old) => !old)
           }}
           // alt='Image of the '
           className='Card_img'
         />
         {/* {deleteStatus ?  (<button>Primary</button>) : (<button>Prime</button>)} */}
         {deleteStatus ? (
-          <button onClick={() => setRemoved([...removedNew, id])}>
+          <button
+            onClick={() =>
+              setRemoved((currentState: any) => [...currentState, id])
+            }
+          >
             Delete
           </button>
         ) : (
           <>
             <button>WishList</button>
-            <button>Add to cart</button>
+            <button onClick={()=>AddToLocalStorage({title,url,description,id})}>Add to cart</button>
           </>
         )}
+        <p>{description}</p>
       </div>
+      <Modal
+        isClose={modalPos}
+        setModalPos={setModalPos}
+        Product={props.product}
+      ></Modal>
     </>
   )
 }
