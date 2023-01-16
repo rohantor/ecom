@@ -1,5 +1,5 @@
 import text from '../data'
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import Card from './Card'
 interface ProductInterface {
   title: string
@@ -7,23 +7,18 @@ interface ProductInterface {
   description: string
   id: number
 }
-export default function Grid() {
+interface AddToLocal{
+  AddToLocalStorage:(value:ProductInterface)=>void
+}
+export default function Grid(props: AddToLocal) {
   const [cardDetailsArray, setCardDeatailsArray] = useState([...text])
   const [removed, setRemoved] = React.useState<Array<number>>([])
   const [cartItems, setCartItems] = useState<Array<ProductInterface>>(
     JSON.parse(localStorage.getItem('Cart') || '[]')
   )
 
-   const AddToLocalStorage = (item:ProductInterface) => {
-    console.log("Added to local Storage")
-     let obj =item
-     setCartItems((curr) => {localStorage.setItem('Cart', JSON.stringify([...curr, obj]))
-     return [...curr, obj]})
-    //  let prev = JSON.parse(localStorage.getItem('Cart') || '[]')
-     
-   }
   return (
-    <div className='grid-container' id ="GridBox" style={{float:'left'}}>
+    <div className='grid-container' id='GridBox' style={{ float: 'left' }}>
       {cardDetailsArray
         ?.filter((item) => !removed?.includes(item.id))
         ?.map((item) => {
@@ -35,7 +30,7 @@ export default function Grid() {
                 description: item.description,
                 id: item.id,
                 setRemoved: setRemoved,
-                AddToLocalStorage: AddToLocalStorage,
+                AddToLocalStorage: props.AddToLocalStorage,
               }}
             />
           )
