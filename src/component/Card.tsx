@@ -1,23 +1,23 @@
-import React, { SetStateAction } from 'react'
-
+import React, { Dispatch, SetStateAction } from 'react'
+import Button from '@mui/material/Button'
 interface ProductInterface {
   title: string
   url: string
   description: string
   id: number
-  setRemoved: (abc: SetStateAction<never[]>) => void
+  removedNew: Array<number>
+  setRemoved: (value: any) => void
 }
-interface propsInterface {
-  Product: ProductInterface
+
+interface PropsInterface {
+  product: ProductInterface
 }
-export default function Card(props: propsInterface) {
-  const { title, url, description, id } = props.Product
+export default function Card(props: PropsInterface) {
+  const { title, url, description, id, setRemoved, removedNew } = props.product
+  const [deleteStatus, setDeleteStatus] = React.useState(false)
   return (
     <>
-      <div
-        className='card_outer'
-        // id={id.toString()}
-      >
+      <div className='card_outer' id={id.toString()}>
         <div>
           <h3 className='title' style={{ display: 'inline-block' }}>
             {id}
@@ -29,22 +29,33 @@ export default function Card(props: propsInterface) {
             src='/trash.png'
             alt=''
             onClick={() => {
-              // setDeletestatus(!deleteStatus);
+              setDeleteStatus(!deleteStatus)
               console.log('Delete')
             }}
             style={{ display: 'inline-block' }}
           />
         </div>
-        {/* <Modal Product ={props.Product}/> */}
-        {/* <img
-          // src={url}alt="Logo"
-          // onClick={() => {
-          // setModalPos((old) => !old);
-          // }}
-
-          alt='Image of the '
+        {/* <Modal product ={props.product}/> */}
+        <img
+          src={url}
+          alt='Logo'
+          onClick={() => {
+            // setModalPos((old) => !old);
+          }}
+          // alt='Image of the '
           className='Card_img'
-        /> */}
+        />
+        {/* {deleteStatus ?  (<button>Primary</button>) : (<button>Prime</button>)} */}
+        {deleteStatus ? (
+          <button onClick={() => setRemoved([...removedNew, id])}>
+            Delete
+          </button>
+        ) : (
+          <>
+            <button>WishList</button>
+            <button>Add to cart</button>
+          </>
+        )}
       </div>
     </>
   )

@@ -1,4 +1,4 @@
-type element = {
+export type element = {
   id: number
   title: string
   url: string

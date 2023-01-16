@@ -15,12 +15,13 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 10vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  /* justify-content: space-around; */
   font-size: calc(10px + 2vmin);
+  display: flex;
   color: white;
 }
 
@@ -35,4 +36,73 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* .grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+} */
+.grid-container {
+  display: grid;
+  gap: 50px;
+  grid-template-columns: auto auto auto;
+ 
+  padding: 10px;
+}
+.card_outer {
+  height: 429px;
+  width: 346px;
+  background-color: #fbd8d88a;
+  border: -7px solid black;
+  border-radius: 30px;
+  box-shadow: 8px 9px #dfc5c587;
+}
+.title{
+
+  align-self: center;
+  width:90%
+}
+.Card_img{
+
+  max-width: 100%;
+}
+.blurBox{
+  position: absolute;
+  z-index: 1;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+border: 5px solid #FFFF00;
+background-color: rgba(49,49,49,0.9); /* Fallback color */
+}
+.OuterModal {
+  
+  position: absolute;
+  z-index: 1;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+/* border: 5px solid #FFFF00; */
+background-color: rgb(241, 241, 241); /* Fallback color */
+/* background-color: rgba(0,0,0,0.9); */
+ /* Black w/ opacity */
+ border-radius: 43px;
+padding: 10px;
+width: 600px;
+height: 400px;
+
+}
+/* body > *:not(#MyModal) {
+  background: #ffd83c;
+  filter: blur(3px);
+} */
+.blur{
+  filter: blur(3px);
+}
+.RemoveScrollbar
+{
+  overflow: hidden; 
 }
