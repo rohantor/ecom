@@ -1,21 +1,11 @@
 import React, { Dispatch, MouseEventHandler, SetStateAction,useState } from 'react'
+import {
+  ProductInterface,
+  ProductWithFuncInterface,
+  PropsInterface,
+} from '../Interface'
 import Modal from './Modal'
-interface ProductInterface {
-  title: string
-  url: string
-  description: string
-  id: number
- 
-}
-interface ProductWithFuncInterface extends ProductInterface {
-  setRemoved: (value: any) => void
-  AddToLocalStorage: (
-    value: ProductInterface
-  ) => void
-}
-interface PropsInterface {
-  product: ProductWithFuncInterface
-}
+
 export default function Card(props: PropsInterface) {
   const { title, url, description, id, setRemoved, AddToLocalStorage } =
     props.product

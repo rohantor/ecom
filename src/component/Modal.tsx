@@ -1,16 +1,6 @@
 import React from 'react'
-interface ProductInterface {
-  title: string
-  url: string
-  description: string
-  id: number
-  setRemoved: (value: any) => void
-}
-interface ModalPropInterface {
-  isClose: boolean
-  setModalPos: React.Dispatch<React.SetStateAction<boolean>>
-  Product: ProductInterface
-}
+import { ModalPropInterface} from '../Interface'
+
 function ModalTest(props: ModalPropInterface) {
  const {isClose,setModalPos,Product} = props;
   return (

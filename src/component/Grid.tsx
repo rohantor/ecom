@@ -1,15 +1,11 @@
 import text from '../data'
 import React, { useState } from 'react'
 import Card from './Card'
-interface ProductInterface {
-  title: string
-  url: string
-  description: string
-  id: number
-}
-interface AddToLocal{
-  AddToLocalStorage:(value:ProductInterface)=>void
-}
+import { ProductInterface, AddToLocal } from '../Interface'
+
+
+
+
 export default function Grid(props: AddToLocal) {
   const [cardDetailsArray, setCardDeatailsArray] = useState([...text])
   const [removed, setRemoved] = React.useState<Array<number>>([])
