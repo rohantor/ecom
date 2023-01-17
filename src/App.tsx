@@ -23,8 +23,13 @@ function App() {
   }
 
   const RemoveFromLocalStorage = (id:number):void=>{
+          
+        setCartItems((prv)=>{
+          let newprv = prv.filter((i) => i.id !== id); 
+          localStorage.setItem('Cart', JSON.stringify(newprv))
+          return newprv}
+          )
 
-        setCartItems([])
   }
   const AddCssForCart = () => {
     const list = document.getElementById('GridBox')?.classList
@@ -103,7 +108,7 @@ function App() {
                           alt=''
                           style={{ display: 'inline-block' }}
                           onClick={() => {
-                            RemoveFromLocalStorage(1)
+                            RemoveFromLocalStorage(item.id)
                           }}
                         />
                       </div>
