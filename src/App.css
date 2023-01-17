@@ -52,6 +52,7 @@
     min-width: 100vw;
   padding: 10px;
 }
+.grab {cursor: -webkit-grab; cursor: grab;}
 .card_outer {
   height: 429px;
   width: 346px;
