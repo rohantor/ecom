@@ -7,7 +7,7 @@ import text from './data'
 import { ProductInterface } from './Interface'
 function App() {
   const [cartIsOpen, setCartIsOpen] = React.useState(false)
-  const [cardDetailsArray, setCardDeatailsArray] = useState(text)
+  const [cardDetailsArray, setCardDetailsArray] = useState(text)
   const [isFormOpen, setFormOpen] = useState(false)
   const [cartItems, setCartItems] = useState<Array<ProductInterface>>(
     JSON.parse(localStorage.getItem('Cart') || '[]')
@@ -91,7 +91,7 @@ function App() {
       {isFormOpen ? (
         <Form
           setFormOpen={setFormOpen}
-          setCardDeatailsArray={setCardDeatailsArray}
+          setCardDetailsArray={setCardDetailsArray}
         ></Form>
       ) : (
         true
@@ -101,7 +101,7 @@ function App() {
         <Grid
           AddToLocalStorage={AddToLocalStorage}
           cardDetailsArray={cardDetailsArray}
-          setCardDeatailsArray={setCardDeatailsArray}
+          setCardDetailsArray={setCardDetailsArray}
         ></Grid>
       ) : (
         <>

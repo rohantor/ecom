@@ -8,12 +8,11 @@ export default function Card(props: PropsInterface) {
     url,
     description,
     id,
-    setRemoved,
-    AddToLocalStorage,
-    index,
     price,
     wishlisted,
   } = props.product
+  const { setRemoved, AddToLocalStorage, setCardDetailsArray, index } =
+    props.func
 
   const [deleteStatus, setDeleteStatus] = useState(false)
   const [modalPos, setModalPos] = useState(false)
@@ -57,7 +56,7 @@ export default function Card(props: PropsInterface) {
           <>
             <button
               onClick={() => {
-                props.product.setCardDeatailsArray((prv) => {
+                setCardDetailsArray((prv) => {
                   let NewArr = prv
 
                   NewArr[index].wishlisted = !NewArr[index].wishlisted

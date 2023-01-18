@@ -9,7 +9,7 @@ export interface ProductInterface {
 export interface AddToLocal {
   AddToLocalStorage: (value: ProductInterface) => void
   cardDetailsArray: ProductInterface[]
-  setCardDeatailsArray: React.Dispatch<React.SetStateAction<ProductInterface[]>>
+  setCardDetailsArray: React.Dispatch<React.SetStateAction<ProductInterface[]>>
 }
 export interface ModalPropInterface {
   isClose: boolean
@@ -17,12 +17,13 @@ export interface ModalPropInterface {
   Product: ProductInterface
 }
 
-export interface ProductWithFuncInterface extends ProductInterface {
+export interface ProductWithFuncInterface {
   setRemoved: (value: any) => void
   AddToLocalStorage: (value: ProductInterface) => void
-  setCardDeatailsArray: React.Dispatch<React.SetStateAction<ProductInterface[]>>
+  setCardDetailsArray: React.Dispatch<React.SetStateAction<ProductInterface[]>>
   index: number
 }
 export interface PropsInterface {
-  product: ProductWithFuncInterface
+  product: ProductInterface;
+  func: ProductWithFuncInterface;
 }

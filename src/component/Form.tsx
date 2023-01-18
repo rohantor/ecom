@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useState } from 'react'
 import { ProductInterface } from '../Interface'
 interface FormInterface {
   setFormOpen: Dispatch<SetStateAction<boolean>>
-  setCardDeatailsArray: Dispatch<SetStateAction<ProductInterface[]>>
+  setCardDetailsArray: Dispatch<SetStateAction<ProductInterface[]>>
 }
 export default function Form(props: FormInterface) {
   const [newItem, setNewItem] = useState({
@@ -135,7 +135,7 @@ export default function Form(props: FormInterface) {
                 <button
                   className='SubmitBtn'
                   onClick={() => {
-                    props.setCardDeatailsArray((prv) => [...prv, newItem])
+                    props.setCardDetailsArray((prv) => [...prv, newItem])
                     props.setFormOpen((old) => !old)
                   }}
                 >
