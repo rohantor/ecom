@@ -70,9 +70,19 @@
   display: grid;
   gap: 50px;
   grid-template-columns: auto auto auto;
-  
+  min-width: 90vw;
   padding: 10px;
 
+}
+
+.btn{
+ width: 92px;
+  height: 36px;
+ background-color: #2ab821;
+  color: ghostwhite;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 13px;
+  
 }
 
 /* 1180 */

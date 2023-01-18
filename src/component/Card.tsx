@@ -46,6 +46,8 @@ export default function Card(props: PropsInterface) {
 
         {deleteStatus ? (
           <button
+            className='btn'
+            style={{ backgroundColor: 'red' }}
             onClick={() =>
               setRemoved((currentState: any) => [...currentState, id])
             }
@@ -55,6 +57,12 @@ export default function Card(props: PropsInterface) {
         ) : (
           <>
             <button
+              className='btn'
+              style={
+                wishlisted
+                  ? { backgroundColor: 'blue' }
+                  : { backgroundColor: 'green' }
+              }
               onClick={() => {
                 setCardDetailsArray((prv) => {
                   let NewArr = prv
@@ -67,7 +75,9 @@ export default function Card(props: PropsInterface) {
             >
               {wishlisted ? 'Added to wishlist' : 'Wishlist'}
             </button>
+            &nbsp; &nbsp;
             <button
+              className='btn'
               onClick={() =>
                 AddToLocalStorage({
                   title,
