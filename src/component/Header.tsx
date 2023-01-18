@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import { ProductInterface } from '../Interface'
+import { CartValueCalculator } from './helper'
 
 interface NewType {
  cartIsOpen: boolean
@@ -32,6 +33,7 @@ export default function Header({
               setFormOpen((old) => !old)
             }
           }}
+          className='grab'
         >
           Add Items
         </h6>
@@ -39,18 +41,24 @@ export default function Header({
           E-Commerce Project{' '}
         </h1>
         {cartIsOpen ? (
-          <h4
-            style={{ marginLeft: '23rem', color: 'red' }}
-            className='grab'
-            onClick={() => {
-              setCartIsOpen((curr) => {
-                return !curr
-              })
-            }}
-          >
-            Cart &nbsp;
-            {cartItems.length}
-          </h4>
+          <>
+            <h6 style={{ marginLeft: '10rem', color: 'green' }}>
+              Value :{CartValueCalculator(cartItems)}
+            </h6>
+            <h4
+              style={{ marginLeft: '10rem', color: 'red' }}
+              className='grab'
+              onClick={() => {
+                setCartIsOpen((curr) => {
+                  return !curr
+                })
+              }}
+            >
+              Cart &nbsp;
+              {cartItems.length}
+            </h4>
+            <br />
+          </>
         ) : (
           <h4
             className='grab'

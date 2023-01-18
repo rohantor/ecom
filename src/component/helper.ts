@@ -15,3 +15,13 @@ export const FormValidator = (obj2: ProductInterface) => {
    return true;
   }
 }
+
+
+export const CartValueCalculator = (cart: ProductInterface[]):number => {
+let total = 0;
+  for(let i =0;i<cart.length;i++){
+    total = total + cart[i].price
+
+  }
+  return total;
+}
