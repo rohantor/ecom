@@ -1,9 +1,8 @@
 import { Dispatch, SetStateAction, useState } from 'react'
 import { ProductInterface } from '../Interface'
-import { element } from '../data'
 interface FormInterface {
   setFormOpen: Dispatch<SetStateAction<boolean>>
-  setCardDeatailsArray: Dispatch<SetStateAction<element[]>>
+  setCardDeatailsArray: Dispatch<SetStateAction<ProductInterface[]>>
 }
 export default function Form(props: FormInterface) {
   const [newItem, setNewItem] = useState({

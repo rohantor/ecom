@@ -1,6 +1,3 @@
-import {element} from  './data'
-export const a=5;
-
 export interface ProductInterface {
   title: string
   url: string
@@ -11,17 +8,8 @@ export interface ProductInterface {
 }
 export interface AddToLocal {
   AddToLocalStorage: (value: ProductInterface) => void
-  cardDetailsArray: element[]
-  setCardDeatailsArray: React.Dispatch<React.SetStateAction<element[]>>
-}
-export interface RemoveFromLocal{
-
-  RemoveFromLocalStorage:(id:number)=>void
-}
-export interface GridInterface{
-
-  LocalStorage:AddToLocal |RemoveFromLocal
-
+  cardDetailsArray: ProductInterface[]
+  setCardDeatailsArray: React.Dispatch<React.SetStateAction<ProductInterface[]>>
 }
 export interface ModalPropInterface {
   isClose: boolean
@@ -32,8 +20,8 @@ export interface ModalPropInterface {
 export interface ProductWithFuncInterface extends ProductInterface {
   setRemoved: (value: any) => void
   AddToLocalStorage: (value: ProductInterface) => void
-  setCardDeatailsArray: React.Dispatch<React.SetStateAction<element[]>>
-  index:number
+  setCardDeatailsArray: React.Dispatch<React.SetStateAction<ProductInterface[]>>
+  index: number
 }
 export interface PropsInterface {
   product: ProductWithFuncInterface

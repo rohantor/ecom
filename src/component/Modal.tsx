@@ -1,8 +1,8 @@
 import React from 'react'
-import { ModalPropInterface} from '../Interface'
+import { ModalPropInterface } from '../Interface'
 
 function ModalTest(props: ModalPropInterface) {
- const {isClose,setModalPos,Product} = props;
+  const { isClose, setModalPos, Product } = props
   return (
     <>
       {isClose ? (
@@ -16,9 +16,19 @@ function ModalTest(props: ModalPropInterface) {
           >
             <div id='MyModal' className='OuterModal'>
               <div>
-                <h2>Id : {Product.id}</h2>
-                <h2>Title : {Product.title}</h2>
-                <h2>Description : {Product.description}</h2>
+                <img className='ModalImg' src={Product.url}></img>
+              </div>
+              <div style={{}}>
+                <h3 >Id : {Product.id}</h3>
+                <h3 >Title : {Product.title}</h3>
+
+                <h2 >Price : {Product.price}</h2>
+                <h2>
+                  Wishlisted : {Product.wishlisted ? 'Yes' : 'No'}
+                </h2>
+                <h4 >
+                  Description : {Product.description}
+                </h4>
               </div>
             </div>
           </div>{' '}

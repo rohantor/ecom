@@ -1,7 +1,13 @@
 .App {
   text-align: center;
 }
+.ModalImg{
 
+    height:80%;
+    max-width: 200px;
+  
+
+}
 .SubmitBtn {
     width: 92px;
     height: 49px;
@@ -109,14 +115,14 @@
 }
 .OuterModal {
   position: absolute;
+  display: flex;
+  float: left;
+  justify-content: space-between;
   z-index: 1;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  /* border: 5px solid #FFFF00; */
-  background-color: rgb(241, 241, 241); /* Fallback color */
-  /* background-color: rgba(0,0,0,0.9); */
-  /* Black w/ opacity */
+  background-color: rgb(241, 241, 241);
   border-radius: 43px;
   padding: 10px;
   width: 600px;

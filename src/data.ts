@@ -1,16 +1,10 @@
-export type element = {
-  id: number
-  title: string
-  url: string
-  description: string,
-  price :number,
-  wishlisted:boolean
-}
-const text: element[] = [
+import {ProductInterface} from  './Interface'
+
+const text: ProductInterface[] = [
   {
     id: 1,
     title: 'Tata Salt, Vacuum Evaporated Iodised',
-    url: 'https://images-eu.ssl-images-amazon.com/images/W/WEBP_402378-T1/images/I/812peq6sD8L._AC_UL600_SR600,400_.jpg',
+    url: 'https://m.media-amazon.com/images/I/61aoHG0V6AL._AC_UL480_FMwebp_QL65_.jpg',
     description: 'Desh ki Sehat, Desh ka Namak',
     price: 10,
     wishlisted: false,
@@ -61,7 +55,7 @@ const text: element[] = [
     url: 'https://m.media-amazon.com/images/I/51jYzijyp5L._AC_UL480_FMwebp_QL65_.jpg',
     description: 'Desh ki Sehat, Desh ka Namak',
     price: 10,
-    wishlisted:false
+    wishlisted: false,
   },
   {
     id: 8,
@@ -69,8 +63,7 @@ const text: element[] = [
     url: 'https://m.media-amazon.com/images/I/81YakxRZLzL._AC_UL480_FMwebp_QL65_.jpg',
     description: 'Desh ki Sehat, Desh ka Namak',
     price: 10,
-    wishlisted:false
-
+    wishlisted: false,
   },
 ]
 

@@ -8,23 +8,16 @@ import { ProductInterface } from './Interface'
 function App() {
   const [cartIsOpen, setCartIsOpen] = React.useState(false)
   const [cardDetailsArray, setCardDeatailsArray] = useState(text)
-  
-
   const [isFormOpen, setFormOpen] = useState(false)
-  React.useEffect(() => {
-    // AddCssForCart()
-  }, [cartIsOpen])
   const [cartItems, setCartItems] = useState<Array<ProductInterface>>(
     JSON.parse(localStorage.getItem('Cart') || '[]')
   )
+
   const AddToLocalStorage = (item: ProductInterface) => {
-    console.log('Added to local Storage')
-    let obj = item
     setCartItems((curr) => {
-      localStorage.setItem('Cart', JSON.stringify([...curr, obj]))
-      return [...curr, obj]
+      localStorage.setItem('Cart', JSON.stringify([...curr, item]))
+      return [...curr, item]
     })
-    //  let prev = JSON.parse(localStorage.getItem('Cart') || '[]')
   }
 
   const RemoveFromLocalStorage = (id: number): void => {
@@ -43,19 +36,6 @@ function App() {
 
     console.log('Remove')
   }
-  const AddCssForCart = () => {
-    const list = document.getElementById('GridBox')?.classList
-
-    if (list?.contains('GridOnCart')) {
-      list?.remove('GridOnCart')
-      list?.add('grid-container')
-    } else {
-      list?.add('GridOnCart')
-      list?.remove('grid-container')
-    }
-
-    console.log('Cart' + list)
-  }
 
   return (
     <div className='App'>
@@ -63,13 +43,15 @@ function App() {
         <h6
           style={
             cartIsOpen
-              ? { display: 'inline-block', marginLeft: '2rem', color: '#282c34' }
+              ? {
+                  display: 'inline-block',
+                  marginLeft: '2rem',
+                  color: '#282c34',
+                }
               : { display: 'inline-block', marginLeft: '2rem' }
           }
           onClick={() => {
-            if(!cartIsOpen)
-            {
-              
+            if (!cartIsOpen) {
               setFormOpen((old) => !old)
             }
           }}
@@ -89,7 +71,8 @@ function App() {
               })
             }}
           >
-            Cart
+            Cart &nbsp;
+            {cartItems.length}
           </h4>
         ) : (
           <h4
@@ -101,7 +84,7 @@ function App() {
               })
             }}
           >
-            Cart
+            Cart &nbsp;{cartItems.length}
           </h4>
         )}
       </header>
@@ -151,7 +134,7 @@ function App() {
                             }}
                           />
                         </div>
-                        {/* <Modal product ={props.product}/> */}
+                      
                         <img src={item.url} alt='Logo' className='Card_img' />
 
                         <p>{item.description}</p>

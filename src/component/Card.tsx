@@ -36,17 +36,15 @@ export default function Card(props: PropsInterface) {
             style={{ display: 'inline-block' }}
           />
         </div>
-        {/* <Modal product ={props.product}/> */}
         <img
           src={url}
           alt='Logo'
           onClick={() => {
             setModalPos((old) => !old)
           }}
-          // alt='Image of the '
           className='Card_img'
         />
-        {/* {deleteStatus ?  (<button>Primary</button>) : (<button>Prime</button>)} */}
+
         {deleteStatus ? (
           <button
             onClick={() =>
