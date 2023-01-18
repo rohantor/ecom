@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useState } from 'react'
 import { ProductInterface } from '../Interface'
+import { FormValidator } from './helper'
 interface FormInterface {
   setFormOpen: Dispatch<SetStateAction<boolean>>
   setCardDetailsArray: Dispatch<SetStateAction<ProductInterface[]>>
@@ -37,7 +38,7 @@ export default function Form(props: FormInterface) {
               <div className='formDiv'>
                 <label htmlFor='input'> Product Name</label>
                 <input
-                  placeholder='add product name'
+                  placeholder=' product name'
                   type='text'
                   value={newItem.title}
                   name='input'
@@ -77,7 +78,7 @@ export default function Form(props: FormInterface) {
                 <label htmlFor='input'> Product Description</label>
                 <input
                   type='text'
-                  placeholder='add product id'
+                  placeholder=' product description'
                   name='input'
                   value={newItem.description}
                   onChange={(event) => {
@@ -120,6 +121,7 @@ export default function Form(props: FormInterface) {
                   type='text'
                   name='input'
                   value={newItem.url}
+                  placeholder='Product Url'
                   className='inputForm'
                   onChange={(event) => {
                     console.log(event.target.value)
@@ -135,8 +137,10 @@ export default function Form(props: FormInterface) {
                 <button
                   className='SubmitBtn'
                   onClick={() => {
-                    props.setCardDetailsArray((prv) => [...prv, newItem])
-                    props.setFormOpen((old) => !old)
+                    if (FormValidator(newItem)) {
+                      props.setCardDetailsArray((prv) => [...prv, newItem])
+                      props.setFormOpen((old) => !old)
+                    }
                   }}
                 >
                   Submit
