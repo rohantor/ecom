@@ -1,4 +1,3 @@
-import text from '../data'
 import React, { useState } from 'react'
 import Card from './Card'
 import { ProductInterface, AddToLocal } from '../Interface'
@@ -7,17 +6,12 @@ import { ProductInterface, AddToLocal } from '../Interface'
 
 
 export default function Grid(props: AddToLocal) {
-  const [cardDetailsArray, setCardDeatailsArray] = useState([...text])
   const [removed, setRemoved] = React.useState<Array<number>>([])
-  const [cartItems, setCartItems] = useState<Array<ProductInterface>>(
-    JSON.parse(localStorage.getItem('Cart') || '[]')
-  )
-
   return (
     <div className='grid-container' id='GridBox' style={{ float: 'left' }}>
-      {cardDetailsArray
+      {props.cardDetailsArray
         ?.filter((item) => !removed?.includes(item.id))
-        ?.map((item) => {
+        ?.map((item,index) => {
           return (
             <Card
               product={{
@@ -25,8 +19,12 @@ export default function Grid(props: AddToLocal) {
                 url: item.url,
                 description: item.description,
                 id: item.id,
+                price: item.price,
+                wishlisted: item.wishlisted,
+                index:index,
                 setRemoved: setRemoved,
                 AddToLocalStorage: props.AddToLocalStorage,
+                setCardDeatailsArray:props.setCardDeatailsArray
               }}
             />
           )

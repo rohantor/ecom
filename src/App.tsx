@@ -1,11 +1,16 @@
 import React, { useState } from 'react'
 import './App.css'
-import Card from './component/Card'
 import Grid from './component/Grid'
-import { relative } from 'path'
+import Form from './component/Form'
+import text from './data'
+
 import { ProductInterface } from './Interface'
 function App() {
   const [cartIsOpen, setCartIsOpen] = React.useState(false)
+  const [cardDetailsArray, setCardDeatailsArray] = useState(text)
+  
+
+  const [isFormOpen, setFormOpen] = useState(false)
   React.useEffect(() => {
     // AddCssForCart()
   }, [cartIsOpen])
@@ -23,24 +28,18 @@ function App() {
   }
 
   const RemoveFromLocalStorage = (id: number): void => {
-    
-        setCartItems((prv)=>{
-          let flag =true;
-          let index:number =-1
-          for(let i in prv){
-
-
-            if(prv[i].id===id && flag)
-            {
-                index = parseInt(i);
-            }
-            
-
-          }
-          let newprv = prv.filter((_,i) => i !== index); 
-          localStorage.setItem('Cart', JSON.stringify(newprv))
-          return newprv}
-          )
+    setCartItems((prv) => {
+      let flag = true
+      let index: number = -1
+      for (let i in prv) {
+        if (prv[i].id === id && flag) {
+          index = parseInt(i)
+        }
+      }
+      let newprv = prv.filter((_, i) => i !== index)
+      localStorage.setItem('Cart', JSON.stringify(newprv))
+      return newprv
+    })
 
     console.log('Remove')
   }
@@ -61,7 +60,23 @@ function App() {
   return (
     <div className='App'>
       <header className='App-header'>
-        <h1 style={{ display: 'inline-block', marginLeft: '32rem' }}>
+        <h6
+          style={
+            cartIsOpen
+              ? { display: 'inline-block', marginLeft: '2rem', color: '#282c34' }
+              : { display: 'inline-block', marginLeft: '2rem' }
+          }
+          onClick={() => {
+            if(!cartIsOpen)
+            {
+              
+              setFormOpen((old) => !old)
+            }
+          }}
+        >
+          Add Items
+        </h6>
+        <h1 style={{ display: 'inline-block', marginLeft: '23rem' }}>
           E-Commerce Project{' '}
         </h1>
         {cartIsOpen ? (
@@ -90,8 +105,21 @@ function App() {
           </h4>
         )}
       </header>
+      {isFormOpen ? (
+        <Form
+          setFormOpen={setFormOpen}
+          setCardDeatailsArray={setCardDeatailsArray}
+        ></Form>
+      ) : (
+        true
+      )}
+
       {!cartIsOpen ? (
-        <Grid AddToLocalStorage={AddToLocalStorage}></Grid>
+        <Grid
+          AddToLocalStorage={AddToLocalStorage}
+          cardDetailsArray={cardDetailsArray}
+          setCardDeatailsArray={setCardDeatailsArray}
+        ></Grid>
       ) : (
         <>
           <div>
@@ -111,11 +139,9 @@ function App() {
                             className='title'
                             style={{ display: 'inline-block' }}
                           >
-                            {item.id}
-
-                            {item.title}
-                          </h3>
-
+                            Price :{item.price}
+                          </h3>{' '}
+                          <h3>{item.title}</h3>
                           <img
                             src='/trash.png'
                             alt=''
