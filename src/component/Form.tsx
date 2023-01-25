@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useState, useRef } from 'react'
 import { ProductInterface } from '../Interface'
 import { FormValidator } from './helper'
 interface FormInterface {
@@ -14,7 +14,7 @@ export default function Form(props: FormInterface) {
     price: 0,
     wishlisted: false,
   })
-
+  const InputRef = useRef<HTMLInputElement>(null)
   return (
     <>
       <div
@@ -31,6 +31,7 @@ export default function Form(props: FormInterface) {
           }}
         >
           <div>
+            <input type='text' disabled value={'React test'} ref={InputRef} />
             <form
               onSubmit={(event) => event.preventDefault()}
               style={{ display: 'left', justifyContent: 'space-around' }}
@@ -44,8 +45,6 @@ export default function Form(props: FormInterface) {
                   name='input'
                   className='inputForm'
                   onChange={(event) => {
-                    
-
                     setNewItem((prv) => {
                       return { ...prv, title: event.target.value }
                     })
@@ -61,8 +60,6 @@ export default function Form(props: FormInterface) {
                   value={newItem.id}
                   className='inputForm'
                   onChange={(event) => {
-                   
-
                     setNewItem((prv) => {
                       return {
                         ...prv,
@@ -82,7 +79,6 @@ export default function Form(props: FormInterface) {
                   name='input'
                   value={newItem.description}
                   onChange={(event) => {
-                    
                     setNewItem((prv) => {
                       return { ...prv, description: event.target.value }
                     })
@@ -97,8 +93,6 @@ export default function Form(props: FormInterface) {
                   name='input'
                   value={newItem.price}
                   onChange={(event) => {
-                 
-
                     setNewItem((prv) => {
                       return {
                         ...prv,
@@ -123,8 +117,6 @@ export default function Form(props: FormInterface) {
                   placeholder='Product Url'
                   className='inputForm'
                   onChange={(event) => {
-                   
-
                     setNewItem((prv) => {
                       return { ...prv, url: event.target.value }
                     })
@@ -135,8 +127,11 @@ export default function Form(props: FormInterface) {
               <div>
                 <button
                   className='SubmitBtn'
-                  onClick={() => {
-                    if (FormValidator(newItem)) {
+                  type="button"
+                  onClick={async () => {
+                    
+                    if (await FormValidator(newItem)) {
+                      console.log(InputRef?.current?.value)
                       props.setCardDetailsArray((prv) => [...prv, newItem])
                       props.setFormOpen((old) => !old)
                     }
