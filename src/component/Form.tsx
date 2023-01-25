@@ -44,7 +44,7 @@ export default function Form(props: FormInterface) {
                   name='input'
                   className='inputForm'
                   onChange={(event) => {
-                    console.log(event.target.value)
+                    
 
                     setNewItem((prv) => {
                       return { ...prv, title: event.target.value }
@@ -61,7 +61,7 @@ export default function Form(props: FormInterface) {
                   value={newItem.id}
                   className='inputForm'
                   onChange={(event) => {
-                    console.log(event.target.value)
+                   
 
                     setNewItem((prv) => {
                       return {
@@ -82,8 +82,7 @@ export default function Form(props: FormInterface) {
                   name='input'
                   value={newItem.description}
                   onChange={(event) => {
-                    console.log(event.target.value)
-
+                    
                     setNewItem((prv) => {
                       return { ...prv, description: event.target.value }
                     })
@@ -98,7 +97,7 @@ export default function Form(props: FormInterface) {
                   name='input'
                   value={newItem.price}
                   onChange={(event) => {
-                    console.log(event.target.value)
+                 
 
                     setNewItem((prv) => {
                       return {
@@ -124,7 +123,7 @@ export default function Form(props: FormInterface) {
                   placeholder='Product Url'
                   className='inputForm'
                   onChange={(event) => {
-                    console.log(event.target.value)
+                   
 
                     setNewItem((prv) => {
                       return { ...prv, url: event.target.value }

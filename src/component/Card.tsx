@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import { PropsInterface } from '../Interface'
 import Modal from './Modal'
 
@@ -16,7 +16,14 @@ export default function Card(props: PropsInterface) {
 
   const [deleteStatus, setDeleteStatus] = useState(false)
   const [modalPos, setModalPos] = useState(false)
+useEffect(()=>{
+console.log("Component Mounted")
 
+return ()=>{
+  console.log("Component Unmounted")
+}
+
+},[])
   return (
     <>
       <div className='card_outer' id={id.toString()}>
@@ -30,7 +37,7 @@ export default function Card(props: PropsInterface) {
             alt=''
             onClick={() => {
               setDeleteStatus(!deleteStatus)
-              console.log('Delete')
+           
             }}
             style={{ display: 'inline-block' }}
           />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css'
 import Grid from './component/Grid'
 import Form from './component/Form'
@@ -10,10 +10,13 @@ function App() {
   const [cartIsOpen, setCartIsOpen] = React.useState(false)
   const [cardDetailsArray, setCardDetailsArray] = useState(text)
   const [isFormOpen, setFormOpen] = useState(false)
-  const [cartItems, setCartItems] = useState<Array<ProductInterface>>(
-    JSON.parse(localStorage.getItem('Cart') || '[]')
-  )
+  const [cartItems, setCartItems] = useState<Array<ProductInterface>>([])
 
+  useEffect(() => {
+    setCartItems(JSON.parse(localStorage.getItem('Cart') || '[]'))
+  }, [])
+  
+  
   const AddToLocalStorage = (item: ProductInterface) => {
     setCartItems((curr) => {
       localStorage.setItem('Cart', JSON.stringify([...curr, item]))
@@ -34,8 +37,6 @@ function App() {
       localStorage.setItem('Cart', JSON.stringify(newprv))
       return newprv
     })
-
-    console.log('Remove')
   }
 
   return (
