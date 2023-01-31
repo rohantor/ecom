@@ -1,0 +1,34 @@
+.image{
+ width: 1.rem;
+}
+.OuterFlex{
+
+display: flex;
+justify-content: center;
+flex-direction: row;
+height: 65vh;
+}
+
+.ArrowDiv
+{
+ font-size: 2em;
+ border-radius: 2em;
+ width:4em;
+ cursor: pointer;
+ color: white;
+ background-color: rgb(101, 110, 117);
+ margin: auto;
+
+}
+
+.ArrowDiv:disabled{
+ visibility: hidden;
+}
+.secondDiv{
+height: fit-content;
+
+ display: flex;
+ padding: 1em;
+ border-radius: 1em;
+ background-color: bisque;
+}

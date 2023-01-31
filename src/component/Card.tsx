@@ -1,6 +1,7 @@
 import { useState,useEffect } from 'react'
 import { PropsInterface } from '../Interface'
 import Modal from './Modal'
+import { useHistory } from 'react-router-dom'
 
 export default function Card(props: PropsInterface) {
   const {
@@ -24,6 +25,7 @@ return ()=>{
 }
 
 },[])
+ const history = useHistory()
   return (
     <>
       <div className='card_outer' id={id.toString()}>
@@ -46,7 +48,8 @@ return ()=>{
           src={url}
           alt='Logo'
           onClick={() => {
-            setModalPos((old) => !old)
+          history.push(`/shop/${index}`)
+            // setModalPos((old) => !old)
           }}
           className='Card_img'
         />
