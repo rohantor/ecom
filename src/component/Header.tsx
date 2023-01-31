@@ -1,14 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react'
-import { ProductInterface } from '../Interface'
-import { CartValueCalculator } from '../utils/helper'
 import { NavLink } from 'react-router-dom'
-
-interface NewType {
-  cartIsOpen: boolean
-  setCartIsOpen: Dispatch<SetStateAction<boolean>>
-  setFormOpen: Dispatch<SetStateAction<boolean>>
-  cartItems: ProductInterface[]
-}
 
 export default function Header() {
   return (
@@ -56,9 +46,7 @@ export default function Header() {
           </li>
         </nav>
         <div></div>
-        
       </header>
-     
     </>
   )
 }

@@ -1,21 +1,18 @@
-import React from 'react'
-import { ProductInterface } from '../Interface'
+import  { useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import style from './Individual.module.css'
 import { useHistory } from 'react-router-dom'
-interface Props {
-  cardDetailsArray: ProductInterface[]
-}
+import { store } from '../Context/ContextStore'
 
-function Individual({ cardDetailsArray }: Props) {
+function Individual() {
   let { index } = useParams()
   const history = useHistory()
-
-  if (!(0 <= parseInt(index) && parseInt(index) < cardDetailsArray.length)) {
+  const ctx =useContext(store)
+  if (!(0 <= parseInt(index) && parseInt(index) < ctx.cardDetailsArray.length)) {
     history.push('/NotFound')
   }
-  const { id, title, description, price, wishlisted, url } =
-    cardDetailsArray[index]
+  const { id, title, description, price, wishListed, url } =
+    ctx.cardDetailsArray[index]
 
   return (
     <>
@@ -40,13 +37,13 @@ function Individual({ cardDetailsArray }: Props) {
             <h3>Title : {title}</h3>
 
             <h2>Price : {price}</h2>
-            <h2>Wishlisted : {wishlisted ? 'Yes' : 'No'}</h2>
+            <h2>wishListed : {wishListed ? 'Yes' : 'No'}</h2>
             <h4>Description : {description}</h4>
           </div>
         </div>
         <button
           className={style.ArrowDiv}
-          disabled={parseInt(index) === cardDetailsArray.length - 1}
+          disabled={parseInt(index) === ctx.cardDetailsArray.length - 1}
           onClick={() => {
             history.push(`/shop/${parseInt(index) + 1}`)
           }}

@@ -1,18 +1,19 @@
-import { Dispatch, SetStateAction, useState, useRef, useMemo } from 'react'
-import { ProductInterface } from '../Interface'
+import {   useState, useRef, useMemo,useContext } from 'react'
+
 import { FormValidator } from '../utils/helper'
 import { useLocation } from 'react-router-dom'
-interface FormInterface {
-  setCardDetailsArray: Dispatch<SetStateAction<ProductInterface[]>>
-}
-export default function Form(props: FormInterface) {
+import { store } from '../Context/ContextStore'
+
+export default function Form() {
+  const ctx = useContext(store)
+  const { setCardDetailsArray }= ctx;
   const [newItem, setNewItem] = useState({
     title: '',
     url: '',
     description: '',
     id: 0,
     price: 0,
-    wishlisted: false,
+    wishListed: false,
   })
   const InputRef = useRef<HTMLInputElement>(null)
   const ClearForm = () => {
@@ -22,7 +23,7 @@ export default function Form(props: FormInterface) {
       description: '',
       id: 0,
       price: 0,
-      wishlisted: false,
+      wishListed: false,
     })
   }
   function useQuery() {
@@ -141,7 +142,7 @@ export default function Form(props: FormInterface) {
                 onClick={async () => {
                   if (await FormValidator(newItem)) {
                     console.log(InputRef?.current?.value)
-                    props.setCardDetailsArray((prv) => [...prv, newItem])
+                    setCardDetailsArray((prv) => [...prv, newItem])
 
                     ClearForm()
                   }

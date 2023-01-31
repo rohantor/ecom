@@ -7,7 +7,7 @@ const text: ProductInterface[] = [
     url: 'https://m.media-amazon.com/images/I/61aoHG0V6AL._AC_UL480_FMwebp_QL65_.jpg',
     description: 'Desh ki Sehat, Desh ka Namak',
     price: 20,
-    wishlisted: false,
+    wishListed: false,
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ const text: ProductInterface[] = [
     url: 'https://m.media-amazon.com/images/I/51GyUUKe-0L._AC_UL480_FMwebp_QL65_.jpg',
     description: 'Desh ki Sehat, Desh ka Namak',
     price: 130,
-    wishlisted: false,
+    wishListed: false,
   },
   {
     id: 3,
@@ -23,7 +23,7 @@ const text: ProductInterface[] = [
     url: 'https://m.media-amazon.com/images/I/91o0m2iIpVL._AC_UL480_FMwebp_QL65_.jpg',
     description: 'Desh ki Sehat, Desh ka Namak',
     price: 100,
-    wishlisted: false,
+    wishListed: false,
   },
   {
     id: 4,
@@ -31,7 +31,7 @@ const text: ProductInterface[] = [
     url: 'https://m.media-amazon.com/images/I/61SpB8J3HqL._AC_UL480_FMwebp_QL65_.jpg',
     description: 'Desh ki Sehat, Desh ka Namak',
     price: 300,
-    wishlisted: false,
+    wishListed: false,
   },
   {
     id: 5,
@@ -39,7 +39,7 @@ const text: ProductInterface[] = [
     url: 'https://m.media-amazon.com/images/I/61PzWRvOV3L._AC_UL480_FMwebp_QL65_.jpg',
     description: 'Desh ki Sehat, Desh ka Namak',
     price: 450,
-    wishlisted: false,
+    wishListed: false,
   },
   {
     id: 6,
@@ -47,7 +47,7 @@ const text: ProductInterface[] = [
     url: 'https://m.media-amazon.com/images/I/71y4PjSuO5L._AC_UL480_FMwebp_QL65_.jpg',
     description: 'Desh ki Sehat, Desh ka Namak',
     price: 800,
-    wishlisted: false,
+    wishListed: false,
   },
   {
     id: 7,
@@ -55,7 +55,7 @@ const text: ProductInterface[] = [
     url: 'https://m.media-amazon.com/images/I/51jYzijyp5L._AC_UL480_FMwebp_QL65_.jpg',
     description: 'Desh ki Sehat, Desh ka Namak',
     price: 1000,
-    wishlisted: false,
+    wishListed: false,
   },
   {
     id: 8,
@@ -63,7 +63,7 @@ const text: ProductInterface[] = [
     url: 'https://m.media-amazon.com/images/I/81YakxRZLzL._AC_UL480_FMwebp_QL65_.jpg',
     description: 'Desh ki Sehat, Desh ka Namak',
     price: 2500,
-    wishlisted: false,
+    wishListed: false,
   },
 ]
 

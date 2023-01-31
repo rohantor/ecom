@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { ProductInterface } from '../Interface'
 import { RemoveFromLocalStorage } from '../utils/helper'
-import { maxWidth } from '@mui/system'
+import { store } from '../Context/ContextStore'
 export default function CartPage() {
-  const [cartItems, setCartItems] = useState<Array<ProductInterface>>([])
+  const ctx = useContext(store)
+  const { setCartItems, cartItems } = ctx
 
-    useEffect(() => {
-  setCartItems(JSON.parse(localStorage.getItem('Cart') || '[]'))
-      
-    }, [])
-const Remove = (index: number) => {
-  RemoveFromLocalStorage(index)
-  setCartItems(JSON.parse(localStorage.getItem('Cart') || '[]'))
-}
+  useEffect(() => {
+    setCartItems(JSON.parse(localStorage.getItem('Cart') || '[]'))
+  }, [])
+  const Remove = (index: number) => {
+    RemoveFromLocalStorage(index)
+    setCartItems(JSON.parse(localStorage.getItem('Cart') || '[]'))
+  }
   return (
     <>
       <div>

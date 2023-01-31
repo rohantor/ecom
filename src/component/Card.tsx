@@ -1,31 +1,25 @@
-import { useState,useEffect } from 'react'
-import { PropsInterface } from '../Interface'
-import Modal from './Modal'
+import { useState,useEffect, useContext } from 'react'
+import { CardPropsInterface } from '../Interface'
 import { useHistory } from 'react-router-dom'
+import { store } from '../Context/ContextStore'
 
-export default function Card(props: PropsInterface) {
-  const {
-    title,
-    url,
-    description,
-    id,
-    price,
-    wishlisted,
-  } = props.product
-  const { setRemoved, AddToLocalStorage, setCardDetailsArray, index } =
-    props.func
-
-  const [deleteStatus, setDeleteStatus] = useState(false)
-  const [modalPos, setModalPos] = useState(false)
-useEffect(()=>{
-console.log("Component Mounted")
-
-return ()=>{
-  console.log("Component Unmounted")
+interface Props{
+  product:CardPropsInterface
 }
 
-},[])
- const history = useHistory()
+export default function Card(props: Props) {
+  const { title, url, description, id, price, wishListed,index } = props.product
+
+  const [deleteStatus, setDeleteStatus] = useState(false)
+  const { setCardDetailsArray, AddToLocalStorage } = useContext(store)
+  useEffect(() => {
+    console.log('Component Mounted')
+
+    return () => {
+      console.log('Component Unmounted')
+    }
+  }, [])
+  const history = useHistory()
   return (
     <>
       <div className='card_outer' id={id.toString()}>
@@ -39,7 +33,6 @@ return ()=>{
             alt=''
             onClick={() => {
               setDeleteStatus(!deleteStatus)
-           
             }}
             style={{ display: 'inline-block' }}
           />
@@ -48,8 +41,7 @@ return ()=>{
           src={url}
           alt='Logo'
           onClick={() => {
-          history.push(`/shop/${index}`)
-            // setModalPos((old) => !old)
+            history.push(`/shop/${index}`)
           }}
           className='Card_img'
         />
@@ -59,7 +51,9 @@ return ()=>{
             className='btn'
             style={{ backgroundColor: 'red' }}
             onClick={() =>
-              setRemoved((currentState: any) => [...currentState, id])
+              setCardDetailsArray((currentState) => {
+                return currentState.filter((item) => item.id !== id)
+              })
             }
           >
             Delete
@@ -69,7 +63,7 @@ return ()=>{
             <button
               className='btn'
               style={
-                wishlisted
+                wishListed
                   ? { backgroundColor: 'blue' }
                   : { backgroundColor: 'green' }
               }
@@ -77,13 +71,13 @@ return ()=>{
                 setCardDetailsArray((prv) => {
                   let NewArr = prv
 
-                  NewArr[index].wishlisted = !NewArr[index].wishlisted
+                  NewArr[index].wishListed = !NewArr[index].wishListed
 
                   return [...NewArr]
                 })
               }}
             >
-              {wishlisted ? 'Added to wishlist' : 'Wishlist'}
+              {wishListed ? 'Added to wishlist' : 'Wishlist'}
             </button>
             &nbsp; &nbsp;
             <button
@@ -95,7 +89,7 @@ return ()=>{
                   description,
                   id,
                   price,
-                  wishlisted,
+                  wishListed,
                 })
               }
             >
@@ -105,11 +99,6 @@ return ()=>{
         )}
         <p>{description}</p>
       </div>
-      <Modal
-        isClose={modalPos}
-        setModalPos={setModalPos}
-        Product={props.product}
-      ></Modal>
     </>
   )
 }

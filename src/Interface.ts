@@ -2,9 +2,9 @@ export interface ProductInterface {
   title: string
   url: string
   description: string
-  id: number,
-  price:number,
-  wishlisted:boolean
+  id: number
+  price: number
+  wishListed: boolean
 }
 export interface HomePageInterface{
 
@@ -21,13 +21,6 @@ export interface ModalPropInterface {
   Product: ProductInterface
 }
 
-export interface ProductWithFuncInterface {
-  setRemoved: (value: any) => void
-  AddToLocalStorage: (value: ProductInterface) => void
-  setCardDetailsArray: React.Dispatch<React.SetStateAction<ProductInterface[]>>
+export interface CardPropsInterface extends ProductInterface {
   index: number
-}
-export interface PropsInterface {
-  product: ProductInterface;
-  func: ProductWithFuncInterface;
 }
