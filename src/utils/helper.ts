@@ -29,3 +29,14 @@ export const CartValueCalculator = (cart: ProductInterface[]): number => {
   }
   return total
 }
+
+export const RemoveFromLocalStorage = (id: number): void => {
+  
+      
+    let newprv = JSON.parse(localStorage.getItem('Cart') || '[]').filter(
+      (_: ProductInterface, i: number) => i !== id
+    )
+    localStorage.setItem('Cart', JSON.stringify(newprv))
+
+  
+}

@@ -1,75 +1,43 @@
-import React, { useState, useEffect } from 'react'
 import './App.css'
-import Grid from './component/Grid'
+import Header from './component/Header'
+import AdminPage from './Pages/AdminPage'
+import CartPage from './Pages/CartPage'
+import HomePage from './Pages/HomePage'
+import { Route } from 'react-router-dom'
+import ShoppingPage from './Pages/ShoppingPage'
 import Form from './component/Form'
 import text from './data'
-import Header from './component/Header'
-import Cart from './component/Cart'
-import { ProductInterface } from './Interface'
+import { useState } from 'react'
+import Modal from './component/Modal'
+import Individual from './component/Individual'
 function App() {
-  const [cartIsOpen, setCartIsOpen] = React.useState(false)
-  const [cardDetailsArray, setCardDetailsArray] = useState(text)
-  const [isFormOpen, setFormOpen] = useState(false)
-  const [cartItems, setCartItems] = useState<Array<ProductInterface>>([])
-
-  useEffect(() => {
-    setCartItems(JSON.parse(localStorage.getItem('Cart') || '[]'))
-  }, [])
-  
-  
-  const AddToLocalStorage = (item: ProductInterface) => {
-    setCartItems((curr) => {
-      localStorage.setItem('Cart', JSON.stringify([...curr, item]))
-      return [...curr, item]
-    })
-  }
-
-  const RemoveFromLocalStorage = (id: number): void => {
-    setCartItems((prv) => {
-      let flag = true
-      let index: number = -1
-      for (let i in prv) {
-        if (prv[i].id === id && flag) {
-          index = parseInt(i)
-        }
-      }
-      let newprv = prv.filter((_, i) => i !== index)
-      localStorage.setItem('Cart', JSON.stringify(newprv))
-      return newprv
-    })
-  }
+  const [cardDetailsArray, setCardDetailsArray] = useState(text);
 
   return (
     <div className='App'>
-      <Header
-        cartIsOpen={cartIsOpen}
-        setCartIsOpen={setCartIsOpen}
-        setFormOpen={setFormOpen}
-        cartItems={cartItems}
-      ></Header>
-      {isFormOpen ? (
-        <Form
-          setFormOpen={setFormOpen}
-          setCardDetailsArray={setCardDetailsArray}
-        ></Form>
-      ) : (
-        true
-      )}
-
-      {!cartIsOpen ? (
-        <Grid
-          AddToLocalStorage={AddToLocalStorage}
+      <Header></Header>
+      <Route exact path='/'>
+        <img style={{ width: '100%' }} src='./Hero.png' alt='' />
+        <HomePage
           cardDetailsArray={cardDetailsArray}
           setCardDetailsArray={setCardDetailsArray}
-        ></Grid>
-      ) : (
-        <>
-          <Cart
-            cartItems={cartItems}
-            RemoveFromLocalStorage={RemoveFromLocalStorage}
-          ></Cart>
-        </>
-      )}
+        ></HomePage>
+      </Route>
+      <Route exact path='/shop'>
+        <HomePage
+          cardDetailsArray={cardDetailsArray}
+          setCardDetailsArray={setCardDetailsArray}
+        ></HomePage>
+      </Route>
+      <Route path='/shop/:id/:price' children={<Individual />} />
+        
+      <Route path='/admin'>
+        <AdminPage></AdminPage>
+        <Form setCardDetailsArray={setCardDetailsArray}></Form>
+      </Route>
+      <Route path='/cart'>
+        <CartPage></CartPage>
+      </Route>
     </div>
   )
 }

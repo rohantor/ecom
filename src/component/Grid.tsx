@@ -6,9 +6,6 @@ export default function Grid(props: AddToLocal) {
   const [removed, setRemoved] = useState<Array<number>>([])
   return (
     <>
-      <div>
-        <h1>{props.cardDetailsArray.length - removed.length}</h1>
-      </div>
       <div className='grid-container' id='GridBox' style={{ float: 'left' }}>
         {props.cardDetailsArray
           ?.filter((item) => !removed?.includes(item.id))

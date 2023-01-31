@@ -1,6 +1,28 @@
 .App {
   text-align: center;
 }
+nav {
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 3;
+  margin: auto;
+  margin-top: 26px;
+  flex-wrap: wrap;
+
+  justify-content: space-evenly;
+}
+#ShopCartTitle {
+  font-size: 1.2em;
+  margin-top: 0em;
+  margin-left: -5em;
+  margin-right: 9em;
+}
+nav li {
+  list-style: none;
+  margin-left: 5em;
+  font-size: large;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
 .ModalImg {
   height: 80%;
   max-width: 200px;
@@ -32,18 +54,20 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.selected {
+  color: red;
+}
 .App-header {
-  background-color: #282c34;
+  background-color: white;
   min-height: 10vh;
-  min-width: 100vw;
   display: flex;
   flex-direction: row;
+  flex-shrink: 3;
   align-items: center;
   /* justify-content: space-around; */
   font-size: calc(10px + 2vmin);
   display: flex;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .App-link {
@@ -70,31 +94,26 @@
   display: grid;
   gap: 50px;
   grid-template-columns: auto auto auto;
-  min-width: 90vw;
+  /* min-width: 90vw; */
   padding: 10px;
-
 }
 
-.btn{
- width: 92px;
+.btn {
+  width: 92px;
   height: 36px;
- background-color: #2ab821;
-  color: ghostwhite;
+  background-color: #2ab821;
+  color: black;
   border: 1px solid rgb(0, 0, 0);
   border-radius: 13px;
-  
 }
 
 /* 1180 */
 
- @media only screen and (max-width: 1200) {
+/* @media only screen and (max-width: 1200) {
   .grid-container {
-    
-    
-    grid-template-columns: auto auto ;
-            
+    grid-template-columns: auto auto;
   }
-}
+} */
 
 .grab {
   cursor: -webkit-grab;
@@ -147,8 +166,8 @@
   background-color: rgb(241, 241, 241);
   border-radius: 43px;
   padding: 10px;
-  width: 600px;
-  height: 400px;
+  width: 674px;
+  height: 452px;
 }
 /* body > *:not(#MyModal) {
   background: #ffd83c;
@@ -167,4 +186,28 @@
   grid-template-columns: auto auto;
   max-width: 59vw;
   padding: 6px;
+}
+@media only screen and (max-width: 1212px) {
+
+   .grid-container {
+    grid-template-columns: auto auto;
+  }
+  #ShopCartTitle {
+  font-size: 1.2em;
+  margin-top: 0em;
+  margin-left: -5em;
+  margin-right: 0em;
+}
+}
+@media only screen and (max-width: 1000px) {
+ 
+   .grid-container {
+    grid-template-columns: auto ;
+  }
+   #ShopCartTitle {
+  font-size: 1.2em;
+  margin-top: 0em;
+  margin-left: 0em;
+  margin-right: 0em;
+}
 }

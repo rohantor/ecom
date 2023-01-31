@@ -6,10 +6,14 @@ export interface ProductInterface {
   price:number,
   wishlisted:boolean
 }
-export interface AddToLocal {
-  AddToLocalStorage: (value: ProductInterface) => void
+export interface HomePageInterface{
+
   cardDetailsArray: ProductInterface[]
   setCardDetailsArray: React.Dispatch<React.SetStateAction<ProductInterface[]>>
+}
+export interface AddToLocal extends HomePageInterface {
+  AddToLocalStorage: (value: ProductInterface) => void
+  
 }
 export interface ModalPropInterface {
   isClose: boolean

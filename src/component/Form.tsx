@@ -1,8 +1,7 @@
 import { Dispatch, SetStateAction, useState, useRef } from 'react'
 import { ProductInterface } from '../Interface'
-import { FormValidator } from './helper'
+import { FormValidator } from '../utils/helper'
 interface FormInterface {
-  setFormOpen: Dispatch<SetStateAction<boolean>>
   setCardDetailsArray: Dispatch<SetStateAction<ProductInterface[]>>
 }
 export default function Form(props: FormInterface) {
@@ -15,15 +14,20 @@ export default function Form(props: FormInterface) {
     wishlisted: false,
   })
   const InputRef = useRef<HTMLInputElement>(null)
+  const ClearForm = ()=>{
+
+    setNewItem({
+      title: '',
+      url: '',
+      description: '',
+      id: 0,
+      price: 0,
+      wishlisted: false,
+    })
+  }
   return (
     <>
-      <div
-        className='blurBox'
-        style={{ height: '100vh', width: '100vw' }}
-        onClick={() => {
-          props.setFormOpen((old) => !old)
-        }}
-      >
+    
         <div
           className='OuterModal'
           onClick={(event) => {
@@ -127,13 +131,13 @@ export default function Form(props: FormInterface) {
               <div>
                 <button
                   className='SubmitBtn'
-                  type="button"
+                  type='button'
                   onClick={async () => {
-                    
                     if (await FormValidator(newItem)) {
                       console.log(InputRef?.current?.value)
                       props.setCardDetailsArray((prv) => [...prv, newItem])
-                      props.setFormOpen((old) => !old)
+
+                      ClearForm()
                     }
                   }}
                 >
@@ -141,7 +145,7 @@ export default function Form(props: FormInterface) {
                 </button>
               </div>
             </form>
-          </div>
+        
         </div>
       </div>{' '}
     </>
