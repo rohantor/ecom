@@ -1,6 +1,7 @@
+import { ReactElement } from 'react'
 import { NavLink } from 'react-router-dom'
 
-export default function Header() {
+export default function Header(props: { children: ReactElement }) {
   return (
     <>
       <header className='App-header'>
@@ -47,6 +48,7 @@ export default function Header() {
         </nav>
         <div></div>
       </header>
+      {props.children}
     </>
   )
 }

@@ -9,7 +9,7 @@ export default function Form() {
   const { setCardDetailsArray }= ctx;
   const [newItem, setNewItem] = useState({
     title: '',
-    url: '',
+    image: '',
     description: '',
     id: 0,
     price: 0,
@@ -19,7 +19,7 @@ export default function Form() {
   const ClearForm = () => {
     setNewItem({
       title: '',
-      url: '',
+      image: '',
       description: '',
       id: 0,
       price: 0,
@@ -124,12 +124,12 @@ export default function Form() {
               <input
                 type='text'
                 name='input'
-                value={newItem.url}
+                value={newItem.image}
                 placeholder='Product Url'
                 className='inputForm'
                 onChange={(event) => {
                   setNewItem((prv) => {
-                    return { ...prv, url: event.target.value }
+                    return { ...prv, image: event.target.value }
                   })
                 }}
               />

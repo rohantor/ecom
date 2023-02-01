@@ -1,6 +1,6 @@
 export interface ProductInterface {
   title: string
-  url: string
+  image: string
   description: string
   id: number
   price: number

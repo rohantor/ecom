@@ -1,12 +1,13 @@
 .image{
- width: 1.rem;
+  height: fill-available;
+  width:35vw
 }
 .OuterFlex{
 
 display: flex;
 justify-content: center;
 flex-direction: row;
-height: 65vh;
+max-height: 65vh;
 }
 
 .ArrowDiv
@@ -25,7 +26,7 @@ height: 65vh;
  visibility: hidden;
 }
 .secondDiv{
-height: fit-content;
+height: 80vh;
 
  display: flex;
  padding: 1em;

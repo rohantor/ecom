@@ -2,13 +2,13 @@ import { ProductInterface } from '../Interface'
 export const FormValidator = async (obj2: ProductInterface) => {
   const obj = {
     title: '',
-    url: '',
+    image: '',
     description: '',
   }
-  if (obj.title === obj2.title && obj.url === obj2.url) {
+  if (obj.title === obj2.title && obj.image === obj2.image) {
     return false
   } else if (obj2.id > 0 && obj2.price > 0) {
-    return await isImgUrl(obj2.url)
+    return await isImgUrl(obj2.image)
   }
   return false
 }

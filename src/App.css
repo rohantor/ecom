@@ -89,15 +89,15 @@ nav li {
   padding: 20px;
   font-size: 30px;
   text-align: center;
-} */
-.grid-container {
+} 
+/* .grid-container {
   display: grid;
   gap: 50px;
   grid-template-columns: auto auto auto;
-  /* min-width: 90vw; */
+   min-width: 90vw;
   padding: 10px;
-}
-
+} 
+*/
 .btn {
   width: 92px;
   height: 36px;
@@ -129,6 +129,7 @@ nav li {
 }
 .title {
   align-self: center;
+  margin-bottom: 0;
   width: 90%;
 }
 .Card_img {
@@ -169,10 +170,7 @@ nav li {
   width: 674px;
   height: 452px;
 }
-/* body > *:not(#MyModal) {
-  background: #ffd83c;
-  filter: blur(3px);
-} */
+
 .blur {
   filter: blur(3px);
 }
@@ -188,26 +186,32 @@ nav li {
   padding: 6px;
 }
 @media only screen and (max-width: 1212px) {
-
-   .grid-container {
-    grid-template-columns: auto auto;
-  }
   #ShopCartTitle {
-  font-size: 1.2em;
-  margin-top: 0em;
+ 
+
   margin-left: -5em;
-  margin-right: 0em;
+
 }
 }
 @media only screen and (max-width: 1000px) {
  
-   .grid-container {
-    grid-template-columns: auto ;
-  }
+
    #ShopCartTitle {
-  font-size: 1.2em;
-  margin-top: 0em;
+
+
   margin-left: 0em;
-  margin-right: 0em;
+
 }
+}
+.grid-container {
+    /* display: grid; */
+    display: flex;
+    flex: wrap;
+    flex-wrap: wrap;
+    gap: 50px;
+    /* margin: auto; */
+    margin-left: 8vw;
+    grid-template-columns: auto auto auto;
+    /* min-width: 90vw; */
+    padding: 47px;
 }

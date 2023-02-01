@@ -8,7 +8,7 @@ interface Props{
 }
 
 export default function Card(props: Props) {
-  const { title, url, description, id, price, wishListed,index } = props.product
+  const { title, image, description, id, price, wishListed,index } = props.product
 
   const [deleteStatus, setDeleteStatus] = useState(false)
   const { setCardDetailsArray, AddToLocalStorage } = useContext(store)
@@ -38,10 +38,10 @@ export default function Card(props: Props) {
           />
         </div>
         <img
-          src={url}
+          src={image}
           alt='Logo'
           onClick={() => {
-            history.push(`/shop/${index}`)
+            history.push(`/shop/${id}`)
           }}
           className='Card_img'
         />
@@ -85,7 +85,7 @@ export default function Card(props: Props) {
               onClick={() =>
                 AddToLocalStorage({
                   title,
-                  url,
+                  image,
                   description,
                   id,
                   price,
@@ -97,7 +97,7 @@ export default function Card(props: Props) {
             </button>
           </>
         )}
-        <p>{description}</p>
+        {/* <p>{description}</p> */}
       </div>
     </>
   )

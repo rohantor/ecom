@@ -38,6 +38,7 @@ export default function CartPage() {
                   <div
                     className='card_outer'
                     style={{ backgroundColor: '#84e1f3' }}
+                    id={'cart_'+item.id.toString()}
                   >
                     <div>
                       <h3 className='title' style={{ display: 'inline-block' }}>
@@ -54,9 +55,9 @@ export default function CartPage() {
                       />
                     </div>
 
-                    <img src={item.url} alt='Logo' className='Card_img' />
+                    <img src={item.image} alt='Logo' className='Card_img' />
 
-                    <p>{item.description}</p>
+                    {/* <p>{item.description}</p> */}
                   </div>
                 )
               })}
