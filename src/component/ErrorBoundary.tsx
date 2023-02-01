@@ -2,13 +2,13 @@ import { ErrorBoundary } from 'react-error-boundary'
 
 import React, { useState } from 'react'
 let arr = ['Error']
-function ErrorFallback({
+export function ErrorFallback({
   error,
   resetErrorBoundary,
 }: {
   error: any
   resetErrorBoundary: any
-}) {
+}){
   return (
     <div role='alert'>
       <p>Something went wrong:</p>
