@@ -3,9 +3,9 @@ import Header from './component/Header'
 import CartPage from './Pages/CartPage'
 import HomePage from './Pages/HomePage'
 import { Route, Switch } from 'react-router-dom'
-import Form from './component/Form'
 import Individual from './component/Individual'
 import NFP404 from './component/NFP404'
+import AdminPage from './Pages/AdminPage'
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
         <Route exact path='/shop/:index/' children={<Individual />} />
 
         <Route path='/admin'>
-          <Form></Form>
+          <AdminPage></AdminPage>
         </Route>
         <Route path='/cart'>
           <CartPage></CartPage>

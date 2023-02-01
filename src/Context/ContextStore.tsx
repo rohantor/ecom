@@ -26,7 +26,6 @@ export const store = createContext<StoreInterface>({
 
 export function ContextProvider(props: { children: ReactElement }) {
   const [cardDetailsArray, setCardDetailsArray] = useState(text)
-
   const [cartItems, setCartItems] = useState<Array<ProductInterface>>([])
   const AddToLocalStorage = (item: ProductInterface) => {
     setCartItems((curr) => {
