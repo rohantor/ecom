@@ -1,12 +1,15 @@
-import {   useState, useRef, useMemo,useContext } from 'react'
+import { useState, useRef, useMemo, useContext } from 'react'
 
 import { FormValidator } from '../utils/helper'
 import { useLocation } from 'react-router-dom'
 import { store } from '../Context/ContextStore'
+import axios from 'axios'
+import Loader from 'react-js-loader'
 
 export default function Form() {
   const ctx = useContext(store)
-  const { setCardDetailsArray }= ctx;
+  const [isLoading,setLoading] = useState(false);
+  const { setCardDetailsArray } = ctx
   const [newItem, setNewItem] = useState({
     title: '',
     image: '',
@@ -33,8 +36,55 @@ export default function Form() {
   }
   let query = useQuery()
 
+  async function PostRequest() {
+    var data = JSON.stringify({
+      title: 'test product',
+      price: 13.5,
+      description: 'lorem ipsum set',
+      image: 'https://i.pravatar.cc',
+      category: 'electronic',
+    })
+    var config = {
+      method: 'post',
+      url: 'https://fakestoreapi.com/products',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    }
+    setLoading(true)
+    axios(config)
+      .then(function (response) {
+       
+        console.log(JSON.stringify(response.data))
+ setLoading(false)
+
+      })
+      .catch(function (error) {
+   
+
+        console.log(error)
+      })
+   
+  }
+
   return (
     <>
+      <div
+        style={{ position: 'absolute', top: '45%', left: '44%', zIndex: '3' }}
+      >
+        {isLoading ? (
+          <Loader
+            type='bubble-scale'
+            bgColor={'#125'}
+            title={'Loading'}
+            color={'#125'}
+            size={100}
+          />
+        ) : (
+          <></>
+        )}
+      </div>
       <div
         className='OuterModal'
         onClick={(event) => {
@@ -42,7 +92,12 @@ export default function Form() {
         }}
       >
         <div>
-          <input type='text' disabled value={query.get('q')||'React test'} ref={InputRef} />
+          <input
+            type='text'
+            disabled
+            value={query.get('q') || 'React test'}
+            ref={InputRef}
+          />
           <form
             onSubmit={(event) => event.preventDefault()}
             style={{ display: 'left', justifyContent: 'space-around' }}
@@ -138,10 +193,14 @@ export default function Form() {
             <div>
               <button
                 className='SubmitBtn'
+                style={isLoading ? { backgroundColor: '#ff000059' } : {}}
                 type='button'
+                disabled={isLoading}
                 onClick={async () => {
                   if (await FormValidator(newItem)) {
                     console.log(InputRef?.current?.value)
+                    await PostRequest()
+
                     setCardDetailsArray((prv) => [...prv, newItem])
 
                     ClearForm()
