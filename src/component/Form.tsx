@@ -51,14 +51,10 @@ export default function Form() {
       image: 'https://i.pravatar.cc',
       category: 'electronic',
     }
-    var config = {
-      method: 'post',
-      url: 'https://fakestoreapi.com/products',
-      data: data,
-    }
+
     setLoading(true)
     axios
-      .post(config.url, data)
+      .post('https://fakestoreapi.com/products', data)
       .then((res) => {
         setLoading(false)
         return res.data
@@ -142,7 +138,6 @@ export default function Form() {
                 }}
               />
             </div>{' '}
-         
             <div className='formDiv'>
               <label htmlFor='input'> Product Description</label>
               <input

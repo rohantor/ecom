@@ -7,8 +7,6 @@ import {
 } from 'react'
 import { ProductInterface } from '../Interface'
 
-import text from '../data'
-
 interface StoreInterface {
   cardDetailsArray: ProductInterface[]
   setCardDetailsArray: Dispatch<SetStateAction<ProductInterface[]>>
@@ -32,6 +30,7 @@ export function ContextProvider(props: { children: ReactElement }) {
   const AddToLocalStorage = (item: ProductInterface) => {
     setCartItems((curr) => {
       localStorage.setItem('Cart', JSON.stringify([...curr, item]))
+
       return [...curr, item]
     })
   }

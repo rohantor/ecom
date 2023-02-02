@@ -1,14 +1,17 @@
-import { useState,useEffect, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { CardPropsInterface } from '../Interface'
 import { useHistory } from 'react-router-dom'
 import { store } from '../Context/ContextStore'
 
-interface Props{
-  product:CardPropsInterface
+import { toast } from 'react-toastify'
+import axios, { AxiosResponse } from 'axios'
+interface Props {
+  product: CardPropsInterface
 }
 
 export default function Card(props: Props) {
-  const { title, image, description, id, price, wishListed,index } = props.product
+  const { title, image, description, id, price, wishListed, index } =
+    props.product
 
   const [deleteStatus, setDeleteStatus] = useState(false)
   const { setCardDetailsArray, AddToLocalStorage } = useContext(store)
@@ -20,6 +23,28 @@ export default function Card(props: Props) {
     }
   }, [])
   const history = useHistory()
+
+  const GetPromise = () => {
+    return axios.post('https://fakestoreapi.com/carts', {
+      userId: 5,
+      date: '2020-02-03',
+      products: [
+        { productId: 5, quantity: 1 },
+        { productId: 1, quantity: 5 },
+      ],
+    })
+  }
+  const AddToCartUsingPostApi = () => {
+    notify(GetPromise())
+  }
+  const notify = (POSTPromise: Promise<AxiosResponse<any>>) => {
+    toast.promise(POSTPromise, {
+      pending: ' Trying to add item to cart',
+      success: '🛒 Added to cart!👌',
+      error: 'Failed to add 🤯',
+    })
+  }
+
   return (
     <>
       <div className='card_outer' id={id.toString()}>
@@ -82,7 +107,8 @@ export default function Card(props: Props) {
             &nbsp; &nbsp;
             <button
               className='btn'
-              onClick={() =>
+              onClick={() => {
+                AddToCartUsingPostApi()
                 AddToLocalStorage({
                   title,
                   image,
@@ -91,7 +117,7 @@ export default function Card(props: Props) {
                   price,
                   wishListed,
                 })
-              }
+              }}
             >
               Add to cart
             </button>
