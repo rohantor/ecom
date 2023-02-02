@@ -5,10 +5,17 @@ import { useLocation } from 'react-router-dom'
 import { store } from '../Context/ContextStore'
 import axios from 'axios'
 import Loader from 'react-js-loader'
+import { ProductInterface } from '../Interface'
 
 export default function Form() {
   const ctx = useContext(store)
-  const [isLoading,setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false)
+  const [invalidFormErrors, setFormErrors] = useState({
+    title: '',
+    image: '',
+    description: '',
+    url: '',
+  })
   const { setCardDetailsArray } = ctx
   const [newItem, setNewItem] = useState({
     title: '',
@@ -36,36 +43,29 @@ export default function Form() {
   }
   let query = useQuery()
 
-  async function PostRequest() {
-    var data = JSON.stringify({
+  async function PostRequest(product: ProductInterface) {
+    var data = {
       title: 'test product',
       price: 13.5,
       description: 'lorem ipsum set',
       image: 'https://i.pravatar.cc',
       category: 'electronic',
-    })
+    }
     var config = {
       method: 'post',
       url: 'https://fakestoreapi.com/products',
-      headers: {
-        'Content-Type': 'application/json',
-      },
       data: data,
     }
     setLoading(true)
-    axios(config)
-      .then(function (response) {
-       
-        console.log(JSON.stringify(response.data))
- setLoading(false)
-
+    axios
+      .post(config.url, data)
+      .then((res) => {
+        setLoading(false)
+        return res.data
       })
-      .catch(function (error) {
-   
-
-        console.log(error)
+      .then((value) => {
+        console.log(value)
       })
-   
   }
 
   return (
@@ -98,12 +98,13 @@ export default function Form() {
             value={query.get('q') || 'React test'}
             ref={InputRef}
           />
+
           <form
             onSubmit={(event) => event.preventDefault()}
             style={{ display: 'left', justifyContent: 'space-around' }}
           >
             <div className='formDiv'>
-              <label htmlFor='input'> Product Name</label>
+              <label htmlFor='input'> Product Title</label>
               <input
                 placeholder=' product name'
                 type='text'
@@ -117,6 +118,10 @@ export default function Form() {
                 }}
               />
             </div>
+            <label htmlFor='' className='labelError'>
+              {' '}
+              {invalidFormErrors.title}
+            </label>
             <div className='formDiv'>
               <label htmlFor='input'> Product Id </label>
               <input
@@ -137,6 +142,7 @@ export default function Form() {
                 }}
               />
             </div>{' '}
+         
             <div className='formDiv'>
               <label htmlFor='input'> Product Description</label>
               <input
@@ -152,6 +158,9 @@ export default function Form() {
                 className='inputForm'
               />
             </div>{' '}
+            <label htmlFor='' className='labelError'>
+              {invalidFormErrors.description}
+            </label>
             <div className='formDiv'>
               <label htmlFor='input'> Product Price</label>
               <input
@@ -189,7 +198,7 @@ export default function Form() {
                 }}
               />
             </div>
-            <br />
+            <label className='labelError'>{invalidFormErrors.url}</label>
             <div>
               <button
                 className='SubmitBtn'
@@ -197,13 +206,24 @@ export default function Form() {
                 type='button'
                 disabled={isLoading}
                 onClick={async () => {
-                  if (await FormValidator(newItem)) {
+                  const output = await FormValidator(newItem)
+                  console.log(output)
+
+                  if (typeof output === 'boolean') {
                     console.log(InputRef?.current?.value)
-                    await PostRequest()
+                    await PostRequest(newItem)
+                    setFormErrors({
+                      title: '',
+                      image: '',
+                      description: '',
+                      url: '',
+                    })
 
                     setCardDetailsArray((prv) => [...prv, newItem])
 
                     ClearForm()
+                  } else {
+                    setFormErrors(output)
                   }
                 }}
               >

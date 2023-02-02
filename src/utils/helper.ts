@@ -1,17 +1,38 @@
 import { ProductInterface } from '../Interface'
-export const FormValidator = async (obj2: ProductInterface) => {
-  const obj = {
+export const FormValidator =  async(obj: ProductInterface) => {
+  const Errorobj = {
     title: '',
     image: '',
     description: '',
+    url:''
   }
-  if (obj.title === obj2.title && obj.image === obj2.image) {
-    return false
-  } else if (obj2.id > 0 && obj2.price > 0) {
-    return await isImgUrl(obj2.image)
+
+  if (obj.title==='')
+  {
+    Errorobj.title='title can not be empty'
+    
+    
   }
-  return false
+  if (obj.image === '')
+  {
+    Errorobj.image = 'image can not be empty'
+  }
+  if (obj.description === '') {
+    Errorobj.description = 'description  can not be empty'
+  }
+
+  if (!(await isImgUrl(obj.image)))
+  {
+    Errorobj.url = 'image url is  not valid'
+
+  }
+  if (Errorobj.url ==='' &&  Errorobj.image ==='' && Errorobj.description===''&& Errorobj.title==='')
+  {
+    return true
+  }
+  return Errorobj
 }
+
 
 function isImgUrl(url: string) {
   const img = new Image()

@@ -215,3 +215,9 @@ nav li {
     /* min-width: 90vw; */
     padding: 47px;
 }
+
+.labelError {
+  
+    margin-left: 17rem;
+    color: red;
+}
