@@ -6,17 +6,9 @@ import { Route, Switch } from 'react-router-dom'
 import Individual from './component/Individual'
 import NFP404 from './component/NFP404'
 import AdminPage from './Pages/AdminPage'
-import { useContext, useEffect } from 'react'
-import { store } from './Context/ContextStore'
 
 function App() {
-    const ctx = useContext(store)
-    const {  setCardDetailsArray } = ctx
-    useEffect(() => {
-      fetch('https://fakestoreapi.com/products?limit=6')
-        .then((res) => res.json())
-        .then((json) => setCardDetailsArray(json))
-    }, [])
+   
   return (
     <div className='App'>
       <Header>

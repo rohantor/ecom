@@ -1,15 +1,14 @@
-import { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, FC } from 'react'
 import { CardPropsInterface } from '../Interface'
 import { useHistory } from 'react-router-dom'
 import { store } from '../Context/ContextStore'
-
 import { toast } from 'react-toastify'
 import axios, { AxiosResponse } from 'axios'
 interface Props {
   product: CardPropsInterface
 }
 
-export default function Card(props: Props) {
+export const Card: FC<Props> = (props) => {
   const { title, image, description, id, price, wishListed, index } =
     props.product
 
@@ -24,7 +23,7 @@ export default function Card(props: Props) {
   }, [])
   const history = useHistory()
 
-  const GetPromise = () => {
+  const getPromise = () => {
     return axios.post('https://fakestoreapi.com/carts', {
       userId: 5,
       date: '2020-02-03',
@@ -35,7 +34,7 @@ export default function Card(props: Props) {
     })
   }
   const AddToCartUsingPostApi = () => {
-    notify(GetPromise())
+    notify(getPromise())
   }
   const notify = (POSTPromise: Promise<AxiosResponse<any>>) => {
     toast.promise(POSTPromise, {
@@ -128,3 +127,5 @@ export default function Card(props: Props) {
     </>
   )
 }
+
+export default Card
