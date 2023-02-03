@@ -5,6 +5,7 @@ import { store } from '../Context/ContextStore'
 import { toast } from 'react-toastify'
 import axios, { AxiosResponse } from 'axios'
 import style from './Card.module.css'
+import { CardOuterDiv, Button, H3Price } from './CardStyled'
 interface Props {
   product: CardPropsInterface
 }
@@ -25,7 +26,7 @@ export const Card: FC<Props> = (props) => {
   const history = useHistory()
 
   const getPromise = () => {
-    return axios.post(process.env.REACT_APP_BASE_URL+'carts', {
+    return axios.post(process.env.REACT_APP_BASE_URL + 'carts', {
       userId: 5,
       date: '2020-02-03',
       products: [
@@ -44,12 +45,38 @@ export const Card: FC<Props> = (props) => {
       error: 'Failed to add 🤯',
     })
   }
+  const deleteHandler = () => {
+    setCardDetailsArray((currentState) => {
+      return currentState.filter((item) => item.id !== id)
+    })
+  }
+  const addToWishListedHandler = () => {
+    setCardDetailsArray((prv) => {
+      let NewArr = prv
+
+      NewArr[index].wishListed = !NewArr[index].wishListed
+
+      return [...NewArr]
+    })
+  }
+  const addToCartHandler = () => {
+    AddToCartUsingPostApi()
+    AddToLocalStorage({
+      title,
+      image,
+      description,
+      id,
+      price,
+      wishListed,
+    })
+  }
 
   return (
     <>
-      <div className={style.card_outer} id={id.toString()}>
+      <CardOuterDiv>
         <div>
-          <h3 className={style.title}>Price :{price}</h3> <h3>{title}</h3>
+          <H3Price>Price :{price}</H3Price>
+           <h3>{title}</h3>
           <img
             src='/trash.png'
             alt=''
@@ -69,59 +96,26 @@ export const Card: FC<Props> = (props) => {
         />
 
         {deleteStatus ? (
-          <button
-            className={style.btn}
-            style={{ backgroundColor: 'red' }}
-            onClick={() =>
-              setCardDetailsArray((currentState) => {
-                return currentState.filter((item) => item.id !== id)
-              })
-            }
-          >
+          <Button style={{ backgroundColor: 'red' }} onClick={deleteHandler}>
             Delete
-          </button>
+          </Button>
         ) : (
           <>
-            <button
-              className={style.btn}
+            <Button
               style={
                 wishListed
                   ? { backgroundColor: 'blue' }
                   : { backgroundColor: 'green' }
               }
-              onClick={() => {
-                setCardDetailsArray((prv) => {
-                  let NewArr = prv
-
-                  NewArr[index].wishListed = !NewArr[index].wishListed
-
-                  return [...NewArr]
-                })
-              }}
+              onClick={addToWishListedHandler}
             >
               {wishListed ? 'Added to wishlist' : 'Wishlist'}
-            </button>
-            &nbsp; &nbsp;
-            <button
-              className={style.btn}
-              onClick={() => {
-                AddToCartUsingPostApi()
-                AddToLocalStorage({
-                  title,
-                  image,
-                  description,
-                  id,
-                  price,
-                  wishListed,
-                })
-              }}
-            >
-              Add to cart
-            </button>
+            </Button>
+            &nbsp; &nbsp;{' '}
+            <Button onClick={addToCartHandler}>Add to cart</Button>
           </>
         )}
-        {/* <p>{description}</p> */}
-      </div>
+      </CardOuterDiv>
     </>
   )
 }
