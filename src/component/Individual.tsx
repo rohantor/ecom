@@ -44,7 +44,7 @@ function Individual() {
         id: dataGet.id,
         title: dataGet.title,
         price: dataGet.price,
-        wishListed: false,
+        wishListed: dataGet.wishListed,
         image: dataGet.image,
         description: dataGet.description,
       }
