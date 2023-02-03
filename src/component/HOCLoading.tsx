@@ -11,7 +11,7 @@ export default function HOCLoading(Wrapper: React.FC<any>) {
 
       if (cardDetailsArray.length===0){
 
-        fetch('https://fakestoreapi.com/products?limit=6')
+        fetch(process.env.REACT_APP_BASE_URL+'products?limit=6')
         .then((res) => res.json())
         .then((json) => {
           setCardDetailsArray(json)

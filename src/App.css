@@ -196,12 +196,23 @@ nav li {
 @media only screen and (max-width: 1000px) {
  
 
+  
    #ShopCartTitle {
 
 
   margin-left: 0em;
+  margin:auto;
 
 }
+}
+@media only screen and (max-width: 501px) {
+ 
+
+  #Admin
+  {
+    margin-left: 12em;
+  }
+ 
 }
 .grid-container {
     /* display: grid; */

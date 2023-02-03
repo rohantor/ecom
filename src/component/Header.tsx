@@ -29,6 +29,7 @@ export default function Header(props: { children: ReactElement }) {
           </li>
           <li>
             <NavLink
+            id="Admin"
               to='/admin'
               activeClassName='selected'
               style={{ textDecoration: 'none' }}

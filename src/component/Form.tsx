@@ -54,7 +54,7 @@ export default function Form() {
 
     setLoading(true)
     axios
-      .post('https://fakestoreapi.com/products', data)
+      .post(process.env.REACT_APP_BASE_URL+'products', data)
       .then((res) => {
         setLoading(false)
         return res.data

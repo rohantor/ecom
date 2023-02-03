@@ -24,7 +24,7 @@ export const Card: FC<Props> = (props) => {
   const history = useHistory()
 
   const getPromise = () => {
-    return axios.post('https://fakestoreapi.com/carts', {
+    return axios.post(process.env.REACT_APP_BASE_URL+'carts', {
       userId: 5,
       date: '2020-02-03',
       products: [
