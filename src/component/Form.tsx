@@ -1,5 +1,5 @@
 import { useState, useRef, useMemo, useContext } from 'react'
-
+import style from './Form.module.css'
 import { FormValidator } from '../utils/helper'
 import { useLocation } from 'react-router-dom'
 import { store } from '../Context/ContextStore'
@@ -66,9 +66,7 @@ export default function Form() {
 
   return (
     <>
-      <div
-        style={{ position: 'absolute', top: '45%', left: '44%', zIndex: '3' }}
-      >
+      <div id={style['FormOuterDiv']}>
         {isLoading ? (
           <Loader
             type='bubble-scale'
@@ -82,7 +80,7 @@ export default function Form() {
         )}
       </div>
       <div
-        className='OuterModal'
+        className={style.OuterModal}
         onClick={(event) => {
           event.stopPropagation()
         }}
@@ -95,18 +93,15 @@ export default function Form() {
             ref={InputRef}
           />
 
-          <form
-            onSubmit={(event) => event.preventDefault()}
-            style={{ display: 'left', justifyContent: 'space-around' }}
-          >
-            <div className='formDiv'>
+          <form onSubmit={(event) => event.preventDefault()}>
+            <div className={style.formDiv}>
               <label htmlFor='input'> Product Title</label>
               <input
                 placeholder=' product name'
                 type='text'
                 value={newItem.title}
                 name='input'
-                className='inputForm'
+                className={style.inputForm}
                 onChange={(event) => {
                   setNewItem((prv) => {
                     return { ...prv, title: event.target.value }
@@ -114,18 +109,18 @@ export default function Form() {
                 }}
               />
             </div>
-            <label htmlFor='' className='labelError'>
+            <label htmlFor='' className={style.labelError}>
               {' '}
               {invalidFormErrors.title}
             </label>
-            <div className='formDiv'>
+            <div className={style.formDiv}>
               <label htmlFor='input'> Product Id </label>
               <input
                 placeholder='add product id'
                 type='number'
                 name='input'
                 value={newItem.id}
-                className='inputForm'
+                className={style.inputForm}
                 onChange={(event) => {
                   setNewItem((prv) => {
                     return {
@@ -138,7 +133,7 @@ export default function Form() {
                 }}
               />
             </div>{' '}
-            <div className='formDiv'>
+            <div className={style.formDiv}>
               <label htmlFor='input'> Product Description</label>
               <input
                 type='text'
@@ -150,13 +145,13 @@ export default function Form() {
                     return { ...prv, description: event.target.value }
                   })
                 }}
-                className='inputForm'
+                className={style.inputForm}
               />
             </div>{' '}
-            <label htmlFor='' className='labelError'>
+            <label htmlFor='' className={style.labelError}>
               {invalidFormErrors.description}
             </label>
-            <div className='formDiv'>
+            <div className={style.formDiv}>
               <label htmlFor='input'> Product Price</label>
               <input
                 type='number'
@@ -175,17 +170,17 @@ export default function Form() {
                     }
                   })
                 }}
-                className='inputForm'
+                className={style.inputForm}
               />
             </div>
-            <div className='formDiv'>
+            <div className={style.formDiv}>
               <label htmlFor='input'> Product Url</label>
               <input
                 type='text'
                 name='input'
                 value={newItem.image}
                 placeholder='Product Url'
-                className='inputForm'
+                className={style.inputForm}
                 onChange={(event) => {
                   setNewItem((prv) => {
                     return { ...prv, image: event.target.value }
@@ -193,10 +188,9 @@ export default function Form() {
                 }}
               />
             </div>
-            <label className='labelError'>{invalidFormErrors.url}</label>
+            <label className={style.labelError}>{invalidFormErrors.url}</label>
             <div>
               <button
-                className='SubmitBtn'
                 style={isLoading ? { backgroundColor: '#ff000059' } : {}}
                 type='button'
                 disabled={isLoading}

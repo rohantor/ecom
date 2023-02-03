@@ -1,0 +1,12 @@
+.grid-container {
+    /* display: grid; */
+    display: flex;
+    flex: wrap;
+    flex-wrap: wrap;
+    gap: 50px;
+    /* margin: auto; */
+    margin-left: 8vw;
+    grid-template-columns: auto auto auto;
+    /* min-width: 90vw; */
+    padding: 47px;
+}

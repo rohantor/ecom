@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { store } from '../Context/ContextStore'
 import { toast } from 'react-toastify'
 import axios, { AxiosResponse } from 'axios'
+import style from './Card.module.css'
 interface Props {
   product: CardPropsInterface
 }
@@ -46,12 +47,9 @@ export const Card: FC<Props> = (props) => {
 
   return (
     <>
-      <div className='card_outer' id={id.toString()}>
+      <div className={style.card_outer} id={id.toString()}>
         <div>
-          <h3 className='title' style={{ display: 'inline-block' }}>
-            Price :{price}
-          </h3>{' '}
-          <h3>{title}</h3>
+          <h3 className={style.title}>Price :{price}</h3> <h3>{title}</h3>
           <img
             src='/trash.png'
             alt=''
@@ -67,12 +65,12 @@ export const Card: FC<Props> = (props) => {
           onClick={() => {
             history.push(`/shop/${id}`)
           }}
-          className='Card_img'
+          className={style.Card_img}
         />
 
         {deleteStatus ? (
           <button
-            className='btn'
+            className={style.btn}
             style={{ backgroundColor: 'red' }}
             onClick={() =>
               setCardDetailsArray((currentState) => {
@@ -85,7 +83,7 @@ export const Card: FC<Props> = (props) => {
         ) : (
           <>
             <button
-              className='btn'
+              className={style.btn}
               style={
                 wishListed
                   ? { backgroundColor: 'blue' }
@@ -105,7 +103,7 @@ export const Card: FC<Props> = (props) => {
             </button>
             &nbsp; &nbsp;
             <button
-              className='btn'
+              className={style.btn}
               onClick={() => {
                 AddToCartUsingPostApi()
                 AddToLocalStorage({

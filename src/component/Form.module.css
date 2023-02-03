@@ -1,0 +1,62 @@
+#FormOuterDiv{
+
+position: absolute;
+top:45%;
+left:44%;
+z-index: 3;
+}
+
+.labelError {
+  
+    margin-left: 17rem;
+    color: red;
+}
+.OuterModal {
+  position: absolute;
+  display: flex;
+  float: left;
+  justify-content: space-between;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(241, 241, 241);
+  border-radius: 43px;
+  padding: 10px;
+  width: 674px;
+  height: 452px;
+}
+Button {
+  width: 92px;
+  height: 49px;
+  background-color: seagreen;
+  color: ghostwhite;
+  border: 2px crimson;
+  border-radius: 13px;
+
+}
+.inputForm {
+  border-radius: 18px;
+  margin-top: 14px;
+  width: 200px;
+  height: 29px;
+  background-color: bisque;
+  padding: 10px;
+  right: -69px;
+  position: relative;
+}
+
+form{
+
+ display: left;
+ justify-content: space-around;
+}
+.formDiv {
+  display: flex;
+  justify-content: space-between;
+  max-width: 442px;
+}
+.formDiv label {
+  margin-top: 27px;
+  margin-left: 74px;
+}

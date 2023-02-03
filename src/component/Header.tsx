@@ -1,17 +1,17 @@
 import { ReactElement } from 'react'
 import { NavLink } from 'react-router-dom'
-
+import style from './Header.module.css'
 export default function Header(props: { children: ReactElement }) {
   return (
     <>
-      <header className='App-header'>
+      <header className={style['App-header']}>
         <nav>
-          <li id='ShopCartTitle'>ShopCart</li>
+          <li id={style['ShopCartTitle']}>ShopCart</li>
           <li>
             <NavLink
               exact
               to='/'
-              activeClassName='selected'
+              activeClassName={style.selected}
               style={{ textDecoration: 'none' }}
             >
               Home
@@ -20,7 +20,7 @@ export default function Header(props: { children: ReactElement }) {
           <li>
             <NavLink
               to='/shop'
-              activeClassName='selected'
+              activeClassName={style.selected}
               style={{ textDecoration: 'none' }}
             >
               {' '}
@@ -29,9 +29,9 @@ export default function Header(props: { children: ReactElement }) {
           </li>
           <li>
             <NavLink
-            id="Admin"
+            id={style["Admin"]}
               to='/admin'
-              activeClassName='selected'
+              activeClassName={style.selected}
               style={{ textDecoration: 'none' }}
             >
               Admin
@@ -40,7 +40,7 @@ export default function Header(props: { children: ReactElement }) {
           <li>
             <NavLink
               to='/cart'
-              activeClassName='selected'
+              activeClassName={style.selected}
               style={{ textDecoration: 'none' }}
             >
               Cart
