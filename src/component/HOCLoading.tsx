@@ -6,18 +6,20 @@ export default function HOCLoading(Wrapper: React.FC<any>) {
   function HOC(props: any) {
     const ctx = useContext(store)
     const { setCardDetailsArray, cardDetailsArray } = ctx
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     useEffect(() => {
 
       if (cardDetailsArray.length===0){
+        setLoading(true)
 
         fetch(process.env.REACT_APP_BASE_URL+'products?limit=6')
         .then((res) => res.json())
         .then((json) => {
           setCardDetailsArray(json)
+
+          setLoading(false)
         })
       }
-      setLoading(false)
     }, [])
 
     return (
