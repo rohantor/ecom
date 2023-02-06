@@ -22,14 +22,15 @@ function Individual() {
   })
   async function getProductDetails(index: any) {
     try {
-      if (cardDetailsArray.length === 0 || cardDetailsArray.length <index) {
+      // if (cardDetailsArray.length === 0 || cardDetailsArray.length <index) {
         const res = await fetch(
           `${process.env.REACT_APP_BASE_URL}products/${index}`
         )
         const data = await res.json()
-        return data
-      }
-      return cardDetailsArray[index-1]
+        console.log(data)
+        return data[0]
+      // }
+      // return cardDetailsArray[index-1]
     } catch (error) {
       history.push("/NotFound")
     }

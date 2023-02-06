@@ -12,7 +12,7 @@ export default function HOCLoading(Wrapper: React.FC<any>) {
       if (cardDetailsArray.length===0){
         setLoading(true)
 
-        fetch(process.env.REACT_APP_BASE_URL+'products?limit=6')
+        fetch(process.env.REACT_APP_BASE_URL+'products/')
         .then((res) => res.json())
         .then((json) => {
           json.forEach((item: any) => (item.wishListed = false))

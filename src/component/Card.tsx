@@ -2,10 +2,12 @@ import React, { useState, useEffect, useContext, FC } from 'react'
 import { CardPropsInterface } from '../Interface'
 import { useHistory } from 'react-router-dom'
 import { store } from '../Context/ContextStore'
-import { toast } from 'react-toastify'
+import { ToastContentProps, toast } from 'react-toastify'
 import axios, { AxiosResponse } from 'axios'
 import style from './Card.module.css'
+import Error from './Error'
 import { CardOuterDiv, Button, H3Price } from './CardStyled'
+import { NonNullExpression } from 'typescript'
 interface Props {
   product: CardPropsInterface
 }
@@ -25,30 +27,59 @@ export const Card: FC<Props> = (props) => {
   }, [])
   const history = useHistory()
 
-  const getPromise = () => {
-    return axios.post(process.env.REACT_APP_BASE_URL + 'carts', {
-      userId: 5,
-      date: '2020-02-03',
-      products: [
-        { productId: 5, quantity: 1 },
-        { productId: 1, quantity: 5 },
-      ],
-    })
+  
+
+  
+  const getPromise = (
+    url: string,
+    promiseType: string
+  ): Promise<AxiosResponse<any>> => {
+    if (promiseType === 'post') {
+      return axios.post(url, {
+        id: id,
+        title: title,
+        price: price,
+        description: description,
+        image: image,
+      })
+    } else if (promiseType === 'delete') {
+      return axios.delete(url)
+    }
+    else return axios.get(url)
+     
+    
   }
   const AddToCartUsingPostApi = () => {
-    notify(getPromise())
+    notify(
+      getPromise(process.env.REACT_APP_BASE_URL + 'products/', 'post'),
+      ' Trying to add item to cart',
+      '🛒 Added to cart!👌'
+    )
   }
-  const notify = (POSTPromise: Promise<AxiosResponse<any>>) => {
+  const notify = (
+    POSTPromise: Promise<AxiosResponse<any>>,
+    pending: string,
+    success: string
+  ) => {
     toast.promise(POSTPromise, {
-      pending: ' Trying to add item to cart',
-      success: '🛒 Added to cart!👌',
-      error: 'Failed to add 🤯',
+      pending: pending,
+      success: success,
+      error: {
+        render({ data }) {
+          return <Error message={data} />
+        },
+      },
     })
   }
   const deleteHandler = () => {
     setCardDetailsArray((currentState) => {
       return currentState.filter((item) => item.id !== id)
     })
+    notify(
+      getPromise(process.env.REACT_APP_BASE_URL + 'products/' + id, 'delete'),
+      ' Trying to add item to cart',
+      '🛒 Added to cart!👌'
+    )
   }
   const addToWishListedHandler = () => {
     setCardDetailsArray((prv) => {
@@ -76,7 +107,7 @@ export const Card: FC<Props> = (props) => {
       <CardOuterDiv>
         <div>
           <H3Price>Price :{price}</H3Price>
-           <h3>{title}</h3>
+          <h3>{title}</h3>
           <img
             src='/trash.png'
             alt=''
