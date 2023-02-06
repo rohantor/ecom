@@ -1,13 +1,13 @@
 import { useContext, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import style from './Individual.module.css'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { store } from '../Context/ContextStore'
 import { useState } from 'react'
 import Loader from 'react-js-loader'
 function Individual() {
   let { index } = useParams()
-  const history = useHistory()
+  const navigate = useNavigate()
   const ctx = useContext(store)
 
    const { cardDetailsArray } = ctx
@@ -31,7 +31,7 @@ function Individual() {
       }
       return cardDetailsArray[index-1]
     } catch (error) {
-      history.push("/NotFound")
+      navigate('/NotFound')
     }
   }
 
@@ -71,7 +71,7 @@ function Individual() {
               disabled={index === '1'}
               onClick={() => {
                 console.log('Clicked')
-                history.push(`/shop/${parseInt(index) - 1}`)
+                navigate(`/shop/${parseInt(index) - 1}`)
               }}
             >
               {' '}
@@ -98,7 +98,7 @@ function Individual() {
               className={style.ArrowDiv}
               disabled={index === '20'}
               onClick={() => {
-                history.push(`/shop/${parseInt(index) + 1}`)
+                navigate(`/shop/${parseInt(index) + 1}`)
               }}
             >
               {' '}
