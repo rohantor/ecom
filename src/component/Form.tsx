@@ -1,5 +1,5 @@
 import { useState, useRef, useMemo, useContext } from 'react'
-import style from './Form.module.css'
+import style from './Form.module.scss'
 import { FormValidator } from '../utils/helper'
 import { useLocation } from 'react-router-dom'
 import { store } from '../Context/ContextStore'
