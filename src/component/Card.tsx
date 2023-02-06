@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext, FC } from 'react'
 import { CardPropsInterface } from '../Interface'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { store } from '../Context/ContextStore'
 import { toast } from 'react-toastify'
 import axios, { AxiosResponse } from 'axios'
@@ -23,7 +23,7 @@ export const Card: FC<Props> = (props) => {
       console.log('Component Unmounted')
     }
   }, [])
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const getPromise = () => {
     return axios.post(process.env.REACT_APP_BASE_URL + 'carts', {
@@ -90,7 +90,7 @@ export const Card: FC<Props> = (props) => {
           src={image}
           alt='Logo'
           onClick={() => {
-            history.push(`/shop/${id}`)
+            navigate(`/shop/${id}`)
           }}
           className={style.Card_img}
         />
