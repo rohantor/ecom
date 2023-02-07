@@ -54,7 +54,7 @@ export default function Form() {
 
     setLoading(true)
     axios
-      .post(process.env.REACT_APP_BASE_URL+'products', data)
+      .post(process.env.REACT_APP_BASE_URL + 'products', product)
       .then((res) => {
         setLoading(false)
         return res.data

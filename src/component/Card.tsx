@@ -7,7 +7,6 @@ import axios, { AxiosResponse } from 'axios'
 import style from './Card.module.css'
 import Error from './Error'
 import { CardOuterDiv, Button, H3Price } from './CardStyled'
-import { NonNullExpression } from 'typescript'
 interface Props {
   product: CardPropsInterface
 }
@@ -17,7 +16,7 @@ export const Card: FC<Props> = (props) => {
     props.product
 
   const [deleteStatus, setDeleteStatus] = useState(false)
-  const { setCardDetailsArray, AddToLocalStorage } = useContext(store)
+  const { setCardDetailsArray } = useContext(store)
   useEffect(() => {
     console.log('Component Mounted')
 
@@ -27,9 +26,6 @@ export const Card: FC<Props> = (props) => {
   }, [])
   const navigate = useNavigate()
 
-  
-
-  
   const getPromise = (
     url: string,
     promiseType: string
@@ -44,18 +40,9 @@ export const Card: FC<Props> = (props) => {
       })
     } else if (promiseType === 'delete') {
       return axios.delete(url)
-    }
-    else return axios.get(url)
-     
-    
+    } else return axios.get(url)
   }
-  const AddToCartUsingPostApi = () => {
-    notify(
-      getPromise(process.env.REACT_APP_BASE_URL + 'products/', 'post'),
-      ' Trying to add item to cart',
-      '🛒 Added to cart!👌'
-    )
-  }
+
   const notify = (
     POSTPromise: Promise<AxiosResponse<any>>,
     pending: string,
@@ -77,29 +64,27 @@ export const Card: FC<Props> = (props) => {
     })
     notify(
       getPromise(process.env.REACT_APP_BASE_URL + 'products/' + id, 'delete'),
-      ' Trying to add item to cart',
-      '🛒 Added to cart!👌'
+      ' Trying delete product ',
+      'Product Deleted !👌'
     )
   }
   const addToWishListedHandler = () => {
+
+
     setCardDetailsArray((prv) => {
       let NewArr = prv
-
       NewArr[index].wishListed = !NewArr[index].wishListed
-
       return [...NewArr]
     })
+    console.log(id)
+    axios.put(process.env.REACT_APP_BASE_URL + 'products/' + id)
   }
   const addToCartHandler = () => {
-    AddToCartUsingPostApi()
-    AddToLocalStorage({
-      title,
-      image,
-      description,
-      id,
-      price,
-      wishListed,
-    })
+    notify(
+      getPromise(process.env.REACT_APP_BASE_URL + 'cart/', 'post'),
+      ' Trying to add item to cart',
+      '🛒 Added to cart!👌'
+    )
   }
 
   return (
