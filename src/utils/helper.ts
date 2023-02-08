@@ -1,9 +1,11 @@
+
 import { ProductInterface } from '../Interface'
 export const FormValidator =  async(obj: ProductInterface) => {
   const Errorobj = {
     title: '',
     image: '',
     description: '',
+    id:'',
     url:''
   }
 
@@ -61,3 +63,4 @@ export const RemoveFromLocalStorage = (id: number): void => {
 
   
 }
+

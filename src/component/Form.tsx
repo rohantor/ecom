@@ -7,12 +7,15 @@ import axios from 'axios'
 import Loader from 'react-js-loader'
 import { ProductInterface } from '../Interface'
 
+
+
 export default function Form() {
   const ctx = useContext(store)
   const [isLoading, setLoading] = useState(false)
   const [invalidFormErrors, setFormErrors] = useState({
     title: '',
     image: '',
+    id:'',
     description: '',
     url: '',
   })
@@ -44,24 +47,27 @@ export default function Form() {
   let query = useQuery()
 
   async function PostRequest(product: ProductInterface) {
-    var data = {
-      title: 'test product',
-      price: 13.5,
-      description: 'lorem ipsum set',
-      image: 'https://i.pravatar.cc',
-      category: 'electronic',
-    }
-
     setLoading(true)
-    axios
-      .post(process.env.REACT_APP_BASE_URL + 'products', product)
+     axios
+      .post(process.env.REACT_APP_BASE_URL + 'products', product) 
       .then((res) => {
         setLoading(false)
+        ClearForm()
+
         return res.data
       })
       .then((value) => {
         console.log(value)
       })
+      .catch(() => {
+        setLoading(false)
+        console.log("Errors")
+        setFormErrors((prv)=>{
+          prv.id="Id should be unique"
+          return prv
+        })
+      })
+ 
   }
 
   return (
@@ -133,6 +139,9 @@ export default function Form() {
                 }}
               />
             </div>{' '}
+            <label htmlFor='' className={style.labelError}>
+              {invalidFormErrors.id}
+            </label>
             <div className={style.formDiv}>
               <label htmlFor='input'> Product Description</label>
               <input
@@ -205,12 +214,11 @@ export default function Form() {
                       title: '',
                       image: '',
                       description: '',
+                      id: '',
                       url: '',
                     })
 
                     setCardDetailsArray((prv) => [...prv, newItem])
-
-                    ClearForm()
                   } else {
                     setFormErrors(output)
                   }
