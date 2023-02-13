@@ -6,7 +6,7 @@ import App from './App'
 import { BrowserRouter } from 'react-router-dom'
 import { ContextProvider } from './Context/ContextStore'
 import { ErrorBoundary } from 'react-error-boundary'
-import {ErrorFallback} from '../src/component/ErrorBoundary'
+import {ErrorFallback} from './component/Error/ErrorBoundary'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(

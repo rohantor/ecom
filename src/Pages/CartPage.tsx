@@ -1,11 +1,10 @@
 import React, { useContext, useEffect } from 'react'
 import { ProductInterface } from '../Interface'
 import { store } from '../Context/ContextStore'
-import style from '../component/Card.module.css'
-import cartPageStyle from './CartPage.module.css'
-import GridStyle from '../component/Grid.module.css'
+
+import { cartPageStyle, GridStyle,CardStyle } from '../component'
 import axios from 'axios'
-import Error from '../component/Error'
+import {Error} from '../component'
 import { ToastContainer, toast } from 'react-toastify'
 export default function CartPage() {
   const ctx = useContext(store)
@@ -50,12 +49,12 @@ export default function CartPage() {
               {cartItems?.map((item: ProductInterface, index: number) => {
                 return (
                   <div
-                    className={style.card_outer}
+                    className={CardStyle.card_outer}
                     style={{ backgroundColor: '#84e1f3' }}
                     id={'cart_' + item.id?.toString()}
                   >
                     <div>
-                      <h3 className={style.title}>Price :{item.price}</h3>{' '}
+                      <h3 className={CardStyle.title}>Price :{item.price}</h3>{' '}
                       <h3>{item.title}</h3>
                       <img
                         src='/trash.png'
@@ -70,7 +69,7 @@ export default function CartPage() {
                     <img
                       src={item.image}
                       alt='Logo'
-                      className={style.Card_img}
+                      className={CardStyle.Card_img}
                     />
                   </div>
                 )

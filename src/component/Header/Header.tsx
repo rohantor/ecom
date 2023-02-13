@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 import { NavLink } from 'react-router-dom'
-import style from './Header.module.css'
+import style from '../Styles/Header.module.css'
 export default function Header(props: { children: ReactElement }) {
   return (
     <>

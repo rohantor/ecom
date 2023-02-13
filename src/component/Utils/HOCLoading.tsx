@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Loader from 'react-js-loader'
-import { store } from '../Context/ContextStore'
+import { store } from '../../Context/ContextStore'
 
 export default function HOCLoading(Wrapper: React.FC<any>) {
   function HOC(props: any) {

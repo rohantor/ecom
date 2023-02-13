@@ -1,9 +1,9 @@
 import { useContext } from 'react'
-import Card from './Card'
+import Card from '../Card/Card'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { store } from '../Context/ContextStore'
-import style from './Grid.module.css'
+import { store } from '../../Context/ContextStore'
+import style from '../Styles/Grid.module.css'
 export default function Grid() {
   const ctx = useContext(store)
   const { cardDetailsArray } = ctx

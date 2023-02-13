@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import style from './Individual.module.css'
 import { useNavigate } from 'react-router-dom'
-import { store } from '../Context/ContextStore'
+import { store } from '../../Context/ContextStore'
 import { useState } from 'react'
 import Loader from 'react-js-loader'
 function Individual() {

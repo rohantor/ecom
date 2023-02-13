@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
-import Grid from '../component/Grid'
+import {Grid} from '../component'
 import { store } from '../Context/ContextStore'
 import { useContext } from 'react'
-import HOCLoading from '../component/HOCLoading'
+import {HOCLoading} from '../component'
 export  function HomePage() {
   const ctx = useContext(store)
   useEffect(() => {

@@ -1,15 +1,15 @@
 import { useState, useRef, useMemo, useContext } from 'react'
-import style from './Form.module.scss'
-import { FormValidator } from '../utils/helper'
+import style from '../Styles/Form.module.scss'
+import { FormValidator } from '../../utils/helper'
 import { useLocation } from 'react-router-dom'
-import { store } from '../Context/ContextStore'
+import { store } from '../../Context/ContextStore'
 import axios from 'axios'
 import Loader from 'react-js-loader'
-import { ProductInterface } from '../Interface'
+import { ProductInterface } from '../../Interface'
 
 
 
-export default function Form() {
+const Form:React.FC = ()=> {
   const ctx = useContext(store)
   const [isLoading, setLoading] = useState(false)
   const [invalidFormErrors, setFormErrors] = useState({
@@ -233,3 +233,6 @@ export default function Form() {
     </>
   )
 }
+
+
+export default Form

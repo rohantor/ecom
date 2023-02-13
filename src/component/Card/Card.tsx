@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext, FC } from 'react'
-import { CardPropsInterface } from '../Interface'
+import { CardPropsInterface } from '../../Interface'
 import { useNavigate } from 'react-router-dom'
-import { store } from '../Context/ContextStore'
+import { store } from '../../Context/ContextStore'
 import { ToastContentProps, toast } from 'react-toastify'
 import axios, { AxiosResponse } from 'axios'
-import style from './Card.module.css'
-import Error from './Error'
-import { CardOuterDiv, Button, H3Price } from './CardStyled'
+import style from '../Styles/Card.module.css'
+import Error from '../Error/Error'
+import { CardOuterDiv, Button, H3Price } from '../Styles/CardStyled'
 interface Props {
   product: CardPropsInterface
 }

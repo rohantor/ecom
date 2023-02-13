@@ -1,13 +1,15 @@
-import './App.css'
-import Header from './component/Header'
-import CartPage from './Pages/CartPage'
-import HomePage from './Pages/HomePage'
 import { Route, Router, Routes } from 'react-router-dom'
-import Individual from './component/Individual'
-import NFP404 from './component/NFP404'
-import AdminPage from './Pages/AdminPage'
 import React from 'react'
+import './App.css'
+// import Header from './component/Header/Header'
+// import CartPage from './Pages/CartPage'
+// import HomePage from './Pages/HomePage'
 
+// import Individual from './component/Individual'
+// import NFP404 from './component/Utils/NFP404'
+// import AdminPage from './Pages/AdminPage'
+import { Header,Individual,NFP404} from './component'
+import { HomePage,AdminPage,CartPage } from './Pages'
 function App() {
   return (
     <div className='App'>
