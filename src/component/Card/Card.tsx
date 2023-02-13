@@ -17,13 +17,6 @@ export const Card: FC<Props> = (props) => {
 
   const [deleteStatus, setDeleteStatus] = useState(false)
   const { setCardDetailsArray } = useContext(store)
-  useEffect(() => {
-    console.log('Component Mounted')
-
-    return () => {
-      console.log('Component Unmounted')
-    }
-  }, [])
   const navigate = useNavigate()
 
   const getPromise = (

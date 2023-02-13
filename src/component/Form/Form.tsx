@@ -6,11 +6,13 @@ import { store } from '../../Context/ContextStore'
 import axios from 'axios'
 import Loader from 'react-js-loader'
 import { ProductInterface } from '../../Interface'
+import {useSelector,useDispatch} from 'react-redux'
 
 
 
 const Form:React.FC = ()=> {
   const ctx = useContext(store)
+  const dispatch = useDispatch()
   const [isLoading, setLoading] = useState(false)
   const [invalidFormErrors, setFormErrors] = useState({
     title: '',
@@ -19,7 +21,7 @@ const Form:React.FC = ()=> {
     description: '',
     url: '',
   })
-  const { setCardDetailsArray } = ctx
+  
   const [newItem, setNewItem] = useState({
     title: '',
     image: '',
@@ -218,7 +220,7 @@ const Form:React.FC = ()=> {
                       url: '',
                     })
 
-                    setCardDetailsArray((prv) => [...prv, newItem])
+                    dispatch({ type: 'AddCard', newItem })
                   } else {
                     setFormErrors(output)
                   }

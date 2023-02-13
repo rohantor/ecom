@@ -7,15 +7,15 @@ import { BrowserRouter } from 'react-router-dom'
 import { ContextProvider } from './Context/ContextStore'
 import { ErrorBoundary } from 'react-error-boundary'
 import {ErrorFallback} from './component/Error/ErrorBoundary'
-
+import { Provider } from 'react-redux'
+import store from '../src/store/store'
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <ErrorBoundary FallbackComponent={ErrorFallback}>
     <BrowserRouter>
-      <ContextProvider 
-      >
+      <Provider store ={store}>
         <App />
-      </ContextProvider>
+      </Provider>
     </BrowserRouter>
   </ErrorBoundary>
 )
