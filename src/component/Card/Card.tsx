@@ -7,6 +7,7 @@ import axios, { AxiosResponse } from 'axios'
 import style from '../Styles/Card.module.css'
 import Error from '../Error/Error'
 import { CardOuterDiv, Button, H3Price } from '../Styles/CardStyled'
+import { useDispatch } from 'react-redux'
 interface Props {
   product: CardPropsInterface
 }
@@ -16,9 +17,10 @@ export const Card: FC<Props> = (props) => {
     props.product
 
   const [deleteStatus, setDeleteStatus] = useState(false)
+  const [wishlist, setWishlist] = useState(wishListed)
   const { setCardDetailsArray } = useContext(store)
   const navigate = useNavigate()
-
+  const dispatch = useDispatch()
   const getPromise = (
     url: string,
     promiseType: string
@@ -51,10 +53,10 @@ export const Card: FC<Props> = (props) => {
       },
     })
   }
+
+  console.log("Card got refreshed")
   const deleteHandler = () => {
-    setCardDetailsArray((currentState) => {
-      return currentState.filter((item) => item.id !== id)
-    })
+    dispatch({ type: 'RemoveCard', payload: id })
     notify(
       getPromise(process.env.REACT_APP_BASE_URL + 'products/' + id, 'delete'),
       ' Trying delete product ',
@@ -62,15 +64,9 @@ export const Card: FC<Props> = (props) => {
     )
   }
   const addToWishListedHandler = () => {
-
-
-    setCardDetailsArray((prv) => {
-      let NewArr = prv
-      NewArr[index].wishListed = !NewArr[index].wishListed
-      return [...NewArr]
-    })
-    console.log(id)
     axios.put(process.env.REACT_APP_BASE_URL + 'products/' + id)
+     dispatch({ type: 'Wishlist', payload: index })
+     setWishlist(!wishlist)
   }
   const addToCartHandler = () => {
     notify(
@@ -112,13 +108,13 @@ export const Card: FC<Props> = (props) => {
           <>
             <Button
               style={
-                wishListed
+                wishlist
                   ? { backgroundColor: 'blue' }
                   : { backgroundColor: 'green' }
               }
               onClick={addToWishListedHandler}
             >
-              {wishListed ? 'Added to wishlist' : 'Wishlist'}
+              {wishlist ? 'Added to wishlist' : 'Wishlist'}
             </Button>
             &nbsp; &nbsp;{' '}
             <Button onClick={addToCartHandler}>Add to cart</Button>

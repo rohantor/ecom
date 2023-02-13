@@ -9,7 +9,15 @@ interface AddToCards {
   type: 'AddCards'
   payload: ProductInterface[]
 }
-type ActionType = AddToCards | AddToCard
+interface RemoveCard {
+  type: 'RemoveCard'
+  payload: number
+}
+interface Wishlist {
+  type: 'Wishlist'
+  payload: number
+}
+type ActionType = AddToCards | AddToCard | RemoveCard | Wishlist
 
 interface State {
   cardDetailsArray: ProductInterface[]
@@ -29,10 +37,27 @@ const reducer = (state = initialState, action: ActionType) => {
     }
   }
   if (action.type === 'AddCards') {
-    console.log("payload" + action.payload)
     return {
       ...state,
       cardDetailsArray: [...state.cardDetailsArray, ...action.payload],
+    }
+  }
+  if (action.type === 'RemoveCard') {
+    return {
+      ...state,
+      cardDetailsArray: state.cardDetailsArray.filter(
+        (card) => card.id !== action.payload
+      ),
+    }
+  }
+  if (action.type === 'Wishlist') {
+
+     let NewArr = state.cardDetailsArray
+      NewArr[action.payload].wishListed = !NewArr[action.payload].wishListed
+      console.log(NewArr)
+    return {
+      ...state,
+      cardDetailsArray: NewArr,
     }
   }
   return state

@@ -9,7 +9,9 @@ export default function Grid() {
     cardDetailsArray: ProductInterface[]
     cartItems: ProductInterface[]
   }
-  const data = useSelector((state: State) => state.cardDetailsArray)
+  const data = useSelector((state: State) => state.cardDetailsArray);
+
+  console.log("Grid got refreshed", data)
 
   return (
     <>

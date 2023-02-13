@@ -15,7 +15,6 @@ export default function HOCLoading(Wrapper: React.FC<any>) {
         fetch(process.env.REACT_APP_BASE_URL + 'products/')
           .then((res) => res.json())
           .then((json) => {
-            console.log(json)
             dispatch({ type: 'AddCards', payload:json })
             setLoading(false)
           })
