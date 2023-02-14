@@ -44,10 +44,15 @@ const initialState: CardState = {
     }
   }
   if (action.type === 'RemoveCard') {
+    
+    let temp = [...state.cardDetailsArray]
+     temp.splice(
+        state.cardDetailsArray.findIndex((c) => c.id === action.payload),
+        1
+      )
     return {
-      cardDetailsArray: state.cardDetailsArray.filter(
-        (card) => card.id !== action.payload
-      ),
+      cardDetailsArray: [...temp],
+      
     }
   }
   if (action.type === 'Wishlist') {

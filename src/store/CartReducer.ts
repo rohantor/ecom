@@ -31,11 +31,12 @@ const cartReducer = (state = initialState, action: ActionType) => {
     }
   }
   if (action.type === 'RemoveCartItem') {
+
+    let temp = [...state.cartItems]
+    temp.splice(action.payload,1)
     return {
       ...state,
-      cartItems: state.cartItems.filter(
-        (c: CartProductInterface, index) => index !== action.payload
-      ),
+      cartItems:[... temp],
     }
   }
   return state

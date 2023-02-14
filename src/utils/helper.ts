@@ -1,40 +1,36 @@
-
 import { ProductInterface } from '../Interface'
-export const FormValidator =  async(obj: ProductInterface) => {
+export const FormValidator = async (obj: ProductInterface) => {
   const Errorobj = {
     title: '',
     image: '',
     description: '',
-    id:'',
-    url:''
+    id: '',
+    url: '',
   }
 
-  if (obj.title==='')
-  {
-    Errorobj.title='title can not be empty'
-    
-    
+  if (obj.title === '') {
+    Errorobj.title = 'title can not be empty'
   }
-  if (obj.image === '')
-  {
+  if (obj.image === '') {
     Errorobj.image = 'image can not be empty'
   }
   if (obj.description === '') {
     Errorobj.description = 'description  can not be empty'
   }
 
-  if (!(await isImgUrl(obj.image)))
-  {
+  if (!(await isImgUrl(obj.image))) {
     Errorobj.url = 'image url is  not valid'
-
   }
-  if (Errorobj.url ==='' &&  Errorobj.image ==='' && Errorobj.description===''&& Errorobj.title==='')
-  {
+  if (
+    Errorobj.url === '' &&
+    Errorobj.image === '' &&
+    Errorobj.description === '' &&
+    Errorobj.title === ''
+  ) {
     return true
   }
   return Errorobj
 }
-
 
 function isImgUrl(url: string) {
   const img = new Image()
@@ -53,14 +49,8 @@ export const CartValueCalculator = (cart: ProductInterface[]): number => {
   return total
 }
 
-export const RemoveFromLocalStorage = (id: number): void => {
-  
-      
-    let newprv = JSON.parse(localStorage.getItem('Cart') || '[]').filter(
-      (_: ProductInterface, i: number) => i !== id
-    )
-    localStorage.setItem('Cart', JSON.stringify(newprv))
-
-  
+export const RemoveFromLocalStorage = (index: number): void => {
+  let temp = JSON.parse(localStorage.getItem('Cart') || '[]')
+  temp.splice(index, 1)
+  localStorage.setItem('Cart', JSON.stringify(temp))
 }
-
