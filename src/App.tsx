@@ -1,15 +1,7 @@
-import { Route, Router, Routes } from 'react-router-dom'
-import React from 'react'
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
-// import Header from './component/Header/Header'
-// import CartPage from './Pages/CartPage'
-// import HomePage from './Pages/HomePage'
-
-// import Individual from './component/Individual'
-// import NFP404 from './component/Utils/NFP404'
-// import AdminPage from './Pages/AdminPage'
 import { Header,Individual,NFP404} from './component'
-import { HomePage,AdminPage,CartPage } from './Pages'
+import { HomePage, AdminPage, CartPage, ShoppingPage } from './Pages'
 function App() {
   return (
     <div className='App'>
@@ -19,18 +11,15 @@ function App() {
             exact
             path='/'
             element={
-              <>
-                <img style={{ width: '100%' }} src='./Hero.png' alt='' />
-                <HomePage></HomePage>
-              </>
+             <HomePage/>
             }
           ></Route>
-          <Route exact path='/shop' element={<HomePage></HomePage>}></Route>
+          <Route exact path='/shop' element={<ShoppingPage/>}></Route>
           <Route exact path='/shop/:index/' element={<Individual />} />
 
-          <Route path='/admin' element={<AdminPage></AdminPage>}></Route>
-          <Route path='/cart' element={<CartPage></CartPage>}></Route>
-          <Route path='/*' element={<NFP404></NFP404>}></Route>
+          <Route path='/admin' element={<AdminPage/>}></Route>
+          <Route path='/cart' element={<CartPage/>}></Route>
+          <Route path='/*' element={<NFP404/>}></Route>
         </Routes>
       </Header>
     </div>
