@@ -1,6 +1,7 @@
+import { AxiosError } from 'axios'
 import React from 'react'
 import { ToastContentProps } from 'react-toastify'
 
-export default function Error(data: any) {
-  return <div>{String(data.message.response.data)}</div>
+export default function Error(data:{message:string}) {
+  return <div>{String(data?.message)}</div>
 }

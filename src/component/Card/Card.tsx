@@ -2,7 +2,7 @@ import React, { useState, FC } from 'react'
 import { CardPropsInterface } from '../../Interface'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import axios, { AxiosResponse } from 'axios'
+import axios, { AxiosResponse, isAxiosError,AxiosError } from 'axios'
 import style from '../Styles/Card.module.css'
 import Error from '../Error/Error'
 import { CardOuterDiv, Button, H3Price } from '../Styles/CardStyled'
@@ -46,7 +46,9 @@ export const Card: FC<Props> = (props) => {
       success: success,
       error: {
         render({ data }) {
-          return <Error message={data} />
+          let error: AxiosError = data as AxiosError
+          
+          return <Error message={error.message} />
         },
       },
     })

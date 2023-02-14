@@ -4,6 +4,7 @@ import style from './Individual.module.css'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import Loader from 'react-js-loader'
+import { ProductInterface } from '../../Interface'
 function Individual() {
   let { index } = useParams()
   const navigate = useNavigate()
@@ -11,7 +12,7 @@ function Individual() {
 
    
   const [isLoading, setLoading] = useState(true)
-  const [productObject, setProductObject] = useState<any>({
+  const [productObject, setProductObject] = useState<ProductInterface>({
     id: 0,
     title: '',
     price: 0,
@@ -19,14 +20,14 @@ function Individual() {
     image: '',
     description: '',
   })
-  async function getProductDetails(index: any) {
+  async function getProductDetails(index: string) {
     try {
       // if (cardDetailsArray.length === 0 || cardDetailsArray.length <index) {
         const res = await fetch(
           `${process.env.REACT_APP_BASE_URL}products/${index}`
         )
         const data = await res.json()
-        console.log(data)
+    
         return data[0]
       // }
       // return cardDetailsArray[index-1]
@@ -39,7 +40,7 @@ function Individual() {
     setLoading(true)
     ;(async () => {
       const dataGet = await getProductDetails(index)
-      console.log(dataGet)
+  
       let newObj = {
         id: dataGet.id,
         title: dataGet.title,
@@ -70,7 +71,7 @@ function Individual() {
               className={style.ArrowDiv}
               disabled={index === '1'}
               onClick={() => {
-                console.log('Clicked')
+               
                 navigate(`/shop/${parseInt(index) - 1}`)
               }}
             >

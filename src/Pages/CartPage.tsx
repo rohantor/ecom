@@ -3,7 +3,7 @@ import { CartProductInterface, ProductInterface } from '../Interface'
 
 
 import { cartPageStyle, GridStyle,CardStyle } from '../component'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import {Error} from '../component'
 import { ToastContainer, toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
@@ -31,7 +31,8 @@ export default function CartPage() {
          success: 'Deleted',
          error: {
            render({ data }) {
-             return <Error message={data} />
+             let error: AxiosError = data as AxiosError
+             return <Error message={error.message} />
            },
          },
        })

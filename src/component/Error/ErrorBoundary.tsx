@@ -1,14 +1,11 @@
-import { ErrorBoundary } from 'react-error-boundary'
+import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
 
 import React, { useState } from 'react'
 let arr = ['Error']
-export function ErrorFallback({
+export const ErrorFallback: React.ComponentType<FallbackProps> = ({
   error,
   resetErrorBoundary,
-}: {
-  error: any
-  resetErrorBoundary: any
-}){
+}) => {
   return (
     <div role='alert'>
       <p>Something went wrong:</p>
@@ -18,8 +15,6 @@ export function ErrorFallback({
   )
 }
 function ErrorComponent() {
-  const [index, setIndex] = useState(0)
-
   return (
     <>
       {arr.map((i) => {
