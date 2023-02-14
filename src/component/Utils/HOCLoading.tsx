@@ -8,7 +8,7 @@ export default function HOCLoading(Wrapper: React.FC<any>) {
     const { cardDetailsArray } = useSelector(
       (state: RootStateType) => state.card
     )
-    console.log('init', cardDetailsArray)
+ 
     const [loading, setLoading] = useState({ text: 'Loading', status: false })
     const dispatch = useDispatch()
 
@@ -23,7 +23,7 @@ export default function HOCLoading(Wrapper: React.FC<any>) {
             setLoading({ text: 'Loading', status: false })
           })
           .catch(() => {
-            console.log("Server Refused to connect to")
+            
             setLoading({ text: 'Server Refused to connect', status: true })
           })
       }

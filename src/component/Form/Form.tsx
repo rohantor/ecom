@@ -59,11 +59,11 @@ const Form:React.FC = ()=> {
         return res.data
       })
       .then((value) => {
-        console.log(value)
+        // console.log(value)
       })
       .catch(() => {
         setLoading(false)
-        console.log("Errors")
+      
         setFormErrors((prv)=>{
           prv.id="Id should be unique"
           return prv
@@ -207,10 +207,10 @@ const Form:React.FC = ()=> {
                 disabled={isLoading}
                 onClick={async () => {
                   const output = await FormValidator(newItem)
-                  console.log(output)
+                  
 
                   if (typeof output === 'boolean') {
-                    console.log(InputRef?.current?.value)
+                    // console.log(InputRef?.current?.value)
                     await PostRequest(newItem)
                     setFormErrors({
                       title: '',

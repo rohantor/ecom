@@ -10,7 +10,6 @@ export default function Grid() {
   
   const {cardDetailsArray} = useSelector((state: RootStateType) => state.card);
 
-  console.log("Grid got refreshed", cardDetailsArray)
 
   return (
     <>
