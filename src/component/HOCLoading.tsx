@@ -6,11 +6,11 @@ export default function HOCLoading(Wrapper: React.FC<any>) {
   function HOC(props: any) {
     const ctx = useContext(store)
     const { setCardDetailsArray, cardDetailsArray } = ctx
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState({ text:"Loading",status:false})
     useEffect(() => {
 
       if (cardDetailsArray.length===0){
-        setLoading(true)
+        setLoading({ text: 'Loading', status: true })
 
         fetch(process.env.REACT_APP_BASE_URL+'products?limit=6')
         .then((res) => res.json())
@@ -18,18 +18,20 @@ export default function HOCLoading(Wrapper: React.FC<any>) {
           json.forEach((item: any) => (item.wishListed = false))
           setCardDetailsArray(json)
 
-          setLoading(false)
+          setLoading({ text: 'Loading', status: false })
+        }).catch(()=>{
+          setLoading({ text: 'Server Error', status: false })
         })
       }
     }, [])
 
     return (
       <>
-        {loading ? (
+        {loading.status ? (
           <Loader
             type='bubble-scale'
             bgColor={'#125'}
-            title={'Loading'}
+            title={loading.text}
             color={'#125'}
             size={100}
           />
