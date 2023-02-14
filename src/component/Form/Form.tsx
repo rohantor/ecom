@@ -1,4 +1,4 @@
-import { useState, useRef, useMemo, useContext } from 'react'
+import { useState, useRef, useMemo } from 'react'
 import style from '../Styles/Form.module.scss'
 import { FormValidator } from '../../utils/helper'
 import { useLocation } from 'react-router-dom'
@@ -11,7 +11,7 @@ import {useSelector,useDispatch} from 'react-redux'
 
 
 const Form:React.FC = ()=> {
-  const ctx = useContext(store)
+ 
   const dispatch = useDispatch()
   const [isLoading, setLoading] = useState(false)
   const [invalidFormErrors, setFormErrors] = useState({

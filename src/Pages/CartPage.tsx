@@ -1,29 +1,29 @@
-import React, { useContext, useEffect } from 'react'
-import { ProductInterface } from '../Interface'
-import { store } from '../Context/ContextStore'
+import  {  useEffect } from 'react'
+import { ProductInterface, State } from '../Interface'
+
 
 import { cartPageStyle, GridStyle,CardStyle } from '../component'
 import axios from 'axios'
 import {Error} from '../component'
 import { ToastContainer, toast } from 'react-toastify'
+import { useDispatch, useSelector } from 'react-redux'
 export default function CartPage() {
-  const ctx = useContext(store)
-  const { setCartItems, cartItems } = ctx
+  const dispatch=useDispatch()
+  const  cartItems = useSelector((state:State)=>state.cartItems)
 
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_BASE_URL + 'cart')
       .then((res) => res.data)
       .then((data) => {
-        setCartItems(data)
+        dispatch({ type: 'SetCart', payload: data })
+        
       })
   }, [])
   const Remove = (id: number, index: number) => {
     const promiseObj =axios.delete(process.env.REACT_APP_BASE_URL + 'cart/' + id)
     .then(() => {
-      setCartItems((prv) =>
-        prv.filter((_: ProductInterface, i: number) => i !== index)
-      )
+      dispatch({type: 'RemoveCartItem', payload:index})
     })
        toast.promise(promiseObj, {
          pending: 'Deleting ...',

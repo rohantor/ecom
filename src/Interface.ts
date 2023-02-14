@@ -6,6 +6,13 @@ export interface ProductInterface {
   price: number
   wishListed: boolean
 }
+export interface CartProductInterface {
+  title: string
+  image: string
+  description: string
+  id: number
+  price: number
+}
 export interface HomePageInterface{
 
   cardDetailsArray: ProductInterface[]
@@ -23,4 +30,8 @@ export interface ModalPropInterface {
 
 export interface CardPropsInterface extends ProductInterface {
   index: number
+}
+export interface State {
+  cardDetailsArray: ProductInterface[]
+  cartItems: ProductInterface[]
 }

@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext, FC } from 'react'
+import React, { useState, FC } from 'react'
 import { CardPropsInterface } from '../../Interface'
 import { useNavigate } from 'react-router-dom'
-import { store } from '../../Context/ContextStore'
-import { ToastContentProps, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import axios, { AxiosResponse } from 'axios'
 import style from '../Styles/Card.module.css'
 import Error from '../Error/Error'
@@ -17,8 +16,7 @@ export const Card: FC<Props> = (props) => {
     props.product
 
   const [deleteStatus, setDeleteStatus] = useState(false)
-  const [wishlist, setWishlist] = useState(wishListed)
-  const { setCardDetailsArray } = useContext(store)
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const getPromise = (
@@ -54,7 +52,6 @@ export const Card: FC<Props> = (props) => {
     })
   }
 
-  console.log("Card got refreshed")
   const deleteHandler = () => {
     dispatch({ type: 'RemoveCard', payload: id })
     notify(
@@ -65,8 +62,8 @@ export const Card: FC<Props> = (props) => {
   }
   const addToWishListedHandler = () => {
     axios.put(process.env.REACT_APP_BASE_URL + 'products/' + id)
-     dispatch({ type: 'Wishlist', payload: index })
-     setWishlist(!wishlist)
+    dispatch({ type: 'Wishlist', payload: index })
+    //  setWishlist(!wishlist)
   }
   const addToCartHandler = () => {
     notify(
@@ -108,13 +105,13 @@ export const Card: FC<Props> = (props) => {
           <>
             <Button
               style={
-                wishlist
+                wishListed
                   ? { backgroundColor: 'blue' }
                   : { backgroundColor: 'green' }
               }
               onClick={addToWishListedHandler}
             >
-              {wishlist ? 'Added to wishlist' : 'Wishlist'}
+              {wishListed ? 'Added to wishlist' : 'Wishlist'}
             </Button>
             &nbsp; &nbsp;{' '}
             <Button onClick={addToCartHandler}>Add to cart</Button>

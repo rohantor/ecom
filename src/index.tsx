@@ -4,7 +4,6 @@ import './index.css'
 import App from './App'
 
 import { BrowserRouter } from 'react-router-dom'
-import { ContextProvider } from './Context/ContextStore'
 import { ErrorBoundary } from 'react-error-boundary'
 import {ErrorFallback} from './component/Error/ErrorBoundary'
 import { Provider } from 'react-redux'

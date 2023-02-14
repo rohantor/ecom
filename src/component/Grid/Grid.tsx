@@ -21,7 +21,7 @@ export default function Grid() {
         style={{ float: 'left' }}
       >
         {data?.map((item, index) => {
-          return <Card product={{ ...item, index: index }} />
+          return <Card key={index} product={{ ...item, index: index }} />
         })}{' '}
       </div>
       <ToastContainer
