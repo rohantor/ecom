@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import Loader from 'react-js-loader'
-import {State} from '../../Interface'
+
 import { useDispatch, useSelector } from 'react-redux'
+import { RootStateType } from '../../store/rootReducer'
 export default function HOCLoading(Wrapper: React.FC<any>) {
   function HOC(props: any) {
    
-   const CardDetailsArray = useSelector((state:State)=>state.cardDetailsArray)
+   const { cardDetailsArray } = useSelector(
+     (state: RootStateType) => state.card
+   )
+   console.log('init',cardDetailsArray)
     const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
 
     useEffect(() => {
-      if (CardDetailsArray.length === 0) {
+      if(cardDetailsArray?.length === 0) {
         setLoading(true)
 
         fetch(process.env.REACT_APP_BASE_URL + 'products/')

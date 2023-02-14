@@ -31,7 +31,3 @@ export interface ModalPropInterface {
 export interface CardPropsInterface extends ProductInterface {
   index: number
 }
-export interface State {
-  cardDetailsArray: ProductInterface[]
-  cartItems: ProductInterface[]
-}

@@ -220,7 +220,7 @@ const Form:React.FC = ()=> {
                       url: '',
                     })
 
-                    dispatch({ type: 'AddCard', newItem })
+                    dispatch({ type: 'AddCard',payload: newItem })
                   } else {
                     setFormErrors(output)
                   }

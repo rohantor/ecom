@@ -1,5 +1,5 @@
 import  {  useEffect } from 'react'
-import { ProductInterface, State } from '../Interface'
+import { CartProductInterface, ProductInterface } from '../Interface'
 
 
 import { cartPageStyle, GridStyle,CardStyle } from '../component'
@@ -7,9 +7,10 @@ import axios from 'axios'
 import {Error} from '../component'
 import { ToastContainer, toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
+import { RootStateType } from '../store/rootReducer'
 export default function CartPage() {
   const dispatch=useDispatch()
-  const  cartItems = useSelector((state:State)=>state.cartItems)
+  const  {cartItems} = useSelector((state:RootStateType)=>state.cart)
 
   useEffect(() => {
     axios
@@ -46,7 +47,7 @@ export default function CartPage() {
             </div>
           ) : (
             <>
-              {cartItems?.map((item: ProductInterface, index: number) => {
+              {cartItems?.map((item: CartProductInterface, index: number) => {
                 return (
                   <div
                     className={CardStyle.card_outer}

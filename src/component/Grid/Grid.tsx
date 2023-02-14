@@ -4,14 +4,13 @@ import 'react-toastify/dist/ReactToastify.css'
 import style from '../Styles/Grid.module.css'
 import { useSelector } from 'react-redux'
 import { ProductInterface } from '../../Interface'
-export default function Grid() {
-  interface State {
-    cardDetailsArray: ProductInterface[]
-    cartItems: ProductInterface[]
-  }
-  const data = useSelector((state: State) => state.cardDetailsArray);
+import { RootStateType } from '../../store/rootReducer'
 
-  console.log("Grid got refreshed", data)
+export default function Grid() {
+  
+  const {cardDetailsArray} = useSelector((state: RootStateType) => state.card);
+
+  console.log("Grid got refreshed", cardDetailsArray)
 
   return (
     <>
@@ -20,7 +19,7 @@ export default function Grid() {
         id='GridBox'
         style={{ float: 'left' }}
       >
-        {data?.map((item, index) => {
+        {cardDetailsArray?.map((item: ProductInterface, index: number) => {
           return <Card key={index} product={{ ...item, index: index }} />
         })}{' '}
       </div>
