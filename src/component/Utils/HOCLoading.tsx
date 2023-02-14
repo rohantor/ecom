@@ -5,34 +5,37 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootStateType } from '../../store/rootReducer'
 export default function HOCLoading(Wrapper: React.FC<any>) {
   function HOC(props: any) {
-   
-   const { cardDetailsArray } = useSelector(
-     (state: RootStateType) => state.card
-   )
-   console.log('init',cardDetailsArray)
-    const [loading, setLoading] = useState(false)
+    const { cardDetailsArray } = useSelector(
+      (state: RootStateType) => state.card
+    )
+    console.log('init', cardDetailsArray)
+    const [loading, setLoading] = useState({ text: 'Loading', status: false })
     const dispatch = useDispatch()
 
     useEffect(() => {
       if(cardDetailsArray?.length === 0) {
-        setLoading(true)
+        setLoading({ text: 'Loading', status: true })
 
         fetch(process.env.REACT_APP_BASE_URL + 'products/')
           .then((res) => res.json())
           .then((json) => {
             dispatch({ type: 'SetCards', payload: json })
-            setLoading(false)
+            setLoading({ text: 'Loading', status: false })
+          })
+          .catch(() => {
+            console.log("Server Refused to connect to")
+            setLoading({ text: 'Server Refused to connect', status: true })
           })
       }
     }, [])
 
     return (
       <>
-        {loading ? (
+        {loading.status ? (
           <Loader
             type='bubble-scale'
             bgColor={'#125'}
-            title={'Loading'}
+            title={loading.text}
             color={'#125'}
             size={100}
           />
