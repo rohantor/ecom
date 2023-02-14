@@ -51,7 +51,7 @@ const initialState: CardState = {
     }
   }
   if (action.type === 'Wishlist') {
-    let NewArr = state.cardDetailsArray
+    let NewArr = [...state.cardDetailsArray]
 
     NewArr[action.payload].wishListed = !NewArr[action.payload].wishListed
 
