@@ -30,17 +30,22 @@ const initialState: CardState = {
   cardDetailsArray: [],
 }
 
+const AddToCards = (array1: ProductInterface[], array2: ProductInterface[]) => {
+
+  return [...array1,...array2]
+}
+
  const cardsArrayReducer = (state = initialState, action: ActionType) => {
   if (action.type === 'AddCard') {
+    AddToCards(state.cardDetailsArray, [action.payload])
     return {
-      
-      cardDetailsArray: [...state.cardDetailsArray, action.payload],
+      cardDetailsArray: [...AddToCards(state.cardDetailsArray, [action.payload])],
     }
   }
   if (action.type === 'SetCards') {
     return {
       
-      cardDetailsArray: [...state.cardDetailsArray, ...action.payload],
+      cardDetailsArray: [...AddToCards(state.cardDetailsArray, action.payload)],
     }
   }
   if (action.type === 'RemoveCard') {
