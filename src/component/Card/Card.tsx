@@ -7,6 +7,7 @@ import style from '../Styles/Card.module.css'
 import Error from '../Error/Error'
 import { CardOuterDiv, Button, H3Price } from '../Styles/CardStyled'
 import { useDispatch } from 'react-redux'
+import {CardActions} from '../../store/CardReducer'
 interface Props {
   product: CardPropsInterface
 }
@@ -55,7 +56,7 @@ export const Card: FC<Props> = (props) => {
   }
 
   const deleteHandler = () => {
-    dispatch({ type: 'RemoveCard', payload: id })
+    dispatch(CardActions.RemoveCard(id))
     notify(
       getPromise(process.env.REACT_APP_BASE_URL + 'products/' + id, 'delete'),
       ' Trying delete product ',
@@ -64,7 +65,7 @@ export const Card: FC<Props> = (props) => {
   }
   const addToWishListedHandler = () => {
     axios.put(process.env.REACT_APP_BASE_URL + 'products/' + id)
-    dispatch({ type: 'Wishlist', payload: index })
+    dispatch(CardActions.Wishlist(index))
     //  setWishlist(!wishlist)
   }
   const addToCartHandler = () => {

@@ -1,13 +1,8 @@
 import { combineReducers } from 'redux'
-import cardReducer from './CardReducer'
+import cardReducer, { CardState } from './CardReducer'
 import cartReducer from './CartReducer'
-import { CartState } from './CartReducer'
-import { CardState } from './CardReducer'
-export interface RootStateType {
-  cart: CartState  
-   card: CardState
-}
+export type RootStateType = ReturnType<typeof rootReducer>
 export  const rootReducer =  combineReducers({
-  card: cardReducer,
-  cart:cartReducer,
+  card: cardReducer.reducer,
+  cart:cartReducer.reducer,
 })

@@ -8,6 +8,7 @@ import {Error} from '../component'
 import { ToastContainer, toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootStateType } from '../store/rootReducer'
+import { CartActions } from '../store/CartReducer'
 export default function CartPage() {
   const dispatch=useDispatch()
   const  {cartItems} = useSelector((state:RootStateType)=>state.cart)
@@ -17,7 +18,7 @@ export default function CartPage() {
       .get(process.env.REACT_APP_BASE_URL + 'cart')
       .then((res) => res.data)
       .then((data) => {
-        dispatch({ type: 'SetCart', payload: data })
+        dispatch(CartActions.SetCart(data))
         
       })
   }, [])

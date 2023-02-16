@@ -7,21 +7,14 @@ import axios, { AxiosResponse } from 'axios'
 import { useNavigate } from 'react-router-dom'
 
 interface Props {
-  deleteHandler: {
-    action: string
-    resource: string
-    value: number
-  }
+  deleteHandler: { fn: (i: number) => void; identifier: number ,resource: string;}
   title: string
   image: string
   description: string
   id: number
   price: number
   wishListed?: boolean
-  addToWishListed?: {
-    action: string
-    value: number
-  }
+  addToWishListed?: { fn: (i: number) => void; identifier: number }
   addToCart?: () => {}
 }
 export default function CardTemp(props: Props) {
@@ -37,12 +30,13 @@ export default function CardTemp(props: Props) {
     addToWishListed,
     
   } = props
-
+  
   const [open, setOpen] = useState(false)
   const dispatch = useDispatch()
   const handleWhishList = () => {
-    axios.put(process.env.REACT_APP_BASE_URL + 'products/' + id)
-    dispatch({ type: addToWishListed?.action, payload: addToWishListed?.value })
+    // axios.put(process.env.REACT_APP_BASE_URL + 'products/' + id)
+    addToWishListed?.fn(addToWishListed.identifier)
+   
   }
   const getPromise = (
     url: string,
@@ -61,6 +55,7 @@ export default function CardTemp(props: Props) {
     } else return axios.get(url)
   }
   const addToCartHandler = () => {
+
     notify(
       getPromise(process.env.REACT_APP_BASE_URL + 'cart/', 'post'),
       ' Trying to add item to cart',
@@ -71,10 +66,10 @@ export default function CardTemp(props: Props) {
     setOpen((prv) => !prv)
   }
   const handleDelete = () => {
-    dispatch({ type: deleteHandler.action, payload: deleteHandler.value })
+   deleteHandler.fn(deleteHandler.identifier)
     notify(
       getPromise(process.env.REACT_APP_BASE_URL + deleteHandler.resource+'/' + id, 'delete'),
-      ' Trying tp delete  ',
+      ' Trying to delete  ',
       'Product Deleted !👌'
     )
   }
@@ -97,8 +92,10 @@ export default function CardTemp(props: Props) {
           alt='Logo'
           src={image}
           className={style.Card_img}
+          
           onClick={() => {
-            navigate(`/shop/${id}`)
+
+           typeof wishListed !== 'undefined' && navigate(`/shop/${id}`)
           }}
         />
         {open ? (

@@ -53,4 +53,8 @@ export const RemoveFromLocalStorage = (index: number): void => {
   let temp = JSON.parse(localStorage.getItem('Cart') || '[]')
   temp.splice(index, 1)
   localStorage.setItem('Cart', JSON.stringify(temp))
+
 }
+
+
+ 

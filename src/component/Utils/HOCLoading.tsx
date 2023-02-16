@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Loader from 'react-js-loader'
-
+import { CardActions } from '../../store/CardReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootStateType } from '../../store/rootReducer'
 export default function HOCLoading(Wrapper: React.FC<any>) {
@@ -19,7 +19,7 @@ export default function HOCLoading(Wrapper: React.FC<any>) {
         fetch(process.env.REACT_APP_BASE_URL + 'products/')
           .then((res) => res.json())
           .then((json) => {
-            dispatch({ type: 'SetCards', payload: json })
+            dispatch(CardActions.SetCards(json))
             setLoading({ text: 'Loading', status: false })
           })
           .catch(() => {

@@ -5,7 +5,7 @@ import style from '../Styles/Grid.module.css'
 import { cartPageStyle} from '../'
 
 function GridTemplate({ children }:{children:ReactNode[]}) {
-  console.log(children)
+ 
   return (
     <>
       <div
