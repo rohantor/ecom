@@ -67,17 +67,16 @@ function Individual() {
           />
         ) : (
           <>
-            <button
+            {/* <button
               className={style.ArrowDiv}
               disabled={index === '1'}
               onClick={() => {
-               
                 navigate(`/shop/${parseInt(index) - 1}`)
               }}
             >
               {' '}
               {`<`}{' '}
-            </button>
+            </button> */}
             <div className={style.secondDiv}>
               <div>
                 <img
@@ -95,7 +94,7 @@ function Individual() {
                 <h4>Description : {productObject.description}</h4>
               </div>
             </div>
-            <button
+            {/* <button
               className={style.ArrowDiv}
               disabled={index === '20'}
               onClick={() => {
@@ -104,10 +103,17 @@ function Individual() {
             >
               {' '}
               {`>`}{' '}
-            </button>
+            </button> */}
           </>
         )}
       </div>
+      <button
+        onClick={() => {
+          navigate(-1)
+        }}
+      >
+        Go back
+      </button>
     </>
   )
 }

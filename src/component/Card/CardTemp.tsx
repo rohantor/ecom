@@ -4,6 +4,7 @@ import style from '../Styles/Card.module.css'
 import { useDispatch } from 'react-redux'
 import { notify } from '../Utils/Notify'
 import axios, { AxiosResponse } from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
   deleteHandler: {
@@ -77,6 +78,7 @@ export default function CardTemp(props: Props) {
       'Product Deleted !👌'
     )
   }
+  const navigate = useNavigate()
 
   return (
     <>
@@ -91,7 +93,14 @@ export default function CardTemp(props: Props) {
             onClick={openHandler}
           />
         </div>
-        <img alt='Logo' src={image} className={style.Card_img} />
+        <img
+          alt='Logo'
+          src={image}
+          className={style.Card_img}
+          onClick={() => {
+            navigate(`/shop/${id}`)
+          }}
+        />
         {open ? (
           <Button style={{ backgroundColor: 'red' }} onClick={handleDelete}>
             Delete
