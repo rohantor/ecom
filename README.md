@@ -1,4 +1,4 @@
-# This branch is uding fakestoreAPI
+# This branch is using fakestoreAPI
 
 # Getting Started with Create React App
 
