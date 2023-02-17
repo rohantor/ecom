@@ -1,98 +1,47 @@
-import  {  useEffect } from 'react'
-import { CartProductInterface, ProductInterface } from '../Interface'
-
-
-import { cartPageStyle, GridStyle,CardStyle } from '../component'
-import axios, { AxiosError } from 'axios'
-import {Error} from '../component'
-import { ToastContainer, toast } from 'react-toastify'
+import React, { useEffect } from 'react'
+import GridTemplate from '../component/Grid/Grid'
+import CardTemp from '../component/Card/ProductCard'
+import { CartProductInterface } from '../Interface'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootStateType } from '../store/rootReducer'
+import axios from 'axios'
 import { CartActions } from '../store/CartReducer'
-export default function CartPage() {
-  const dispatch=useDispatch()
-  const  {cartItems} = useSelector((state:RootStateType)=>state.cart)
+import { nanoid } from 'nanoid'
 
+function CartPage() {
+  const { cartItems } = useSelector((state: RootStateType) => state.cart)
+  console.log(cartItems)
+  const dispatch = useDispatch()
+  const deleteHandler=(index:number)=>{
+    dispatch(CartActions.RemoveCartItem(index))
+  
+  }
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_BASE_URL + 'cart')
       .then((res) => res.data)
       .then((data) => {
-        dispatch(CartActions.SetCart(data))
-        
+        dispatch(CartActions.SetCart(data));
       })
   }, [])
-  const Remove = (id: number, index: number) => {
-    const promiseObj =axios.delete(process.env.REACT_APP_BASE_URL + 'cart/' + id)
-    .then(() => {
-      dispatch({type: 'RemoveCartItem', payload:index})
-    })
-       toast.promise(promiseObj, {
-         pending: 'Deleting ...',
-         success: 'Deleted',
-         error: {
-           render({ data }) {
-             let error: AxiosError = data as AxiosError
-             return <Error message={error.message} />
-           },
-         },
-       })
-  }
   return (
-    <>
-      <div>
-        <div className={GridStyle['grid-container']}>
-          {cartItems.length === 0 ? (
-            <div id={cartPageStyle['CartPageOuterDiv']}>
-              <hr />
-              <h1 id={cartPageStyle['CartPageIsEmpty']}>Cart is Empty</h1>
-            </div>
-          ) : (
-            <>
-              {cartItems?.map((item: CartProductInterface, index: number) => {
-                return (
-                  <div
-                    className={CardStyle.card_outer}
-                    style={{ backgroundColor: '#84e1f3' }}
-                    id={'cart_' + item.id?.toString()}
-                  >
-                    <div>
-                      <h3 className={CardStyle.title}>Price :{item.price}</h3>{' '}
-                      <h3>{item.title}</h3>
-                      <img
-                        src='/trash.png'
-                        alt=''
-                        style={{ display: 'inline-block' }}
-                        onClick={() => {
-                          Remove(item.id, index)
-                        }}
-                      />
-                    </div>
-
-                    <img
-                      src={item.image}
-                      alt='Logo'
-                      className={CardStyle.Card_img}
-                    />
-                  </div>
-                )
-              })}
-            </>
-          )}
-        </div>
-      </div>
-      <ToastContainer
-        position='bottom-center'
-        autoClose={500}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme='colored'
-      />
-    </>
+    <GridTemplate>
+      
+      {cartItems?.map((item: CartProductInterface, index: number) => {
+        return (
+          <CardTemp
+          key={nanoid()}
+            deleteHandler={{ fn: deleteHandler, identifier: index,resource:'cart' }}
+            title={item.title}
+            image={item.image}
+            description={item.description}
+            id={item.id}
+            price={item.price}
+          />
+        )
+      })} 
+    </GridTemplate>
   )
 }
+
+export default CartPage
