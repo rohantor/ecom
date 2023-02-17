@@ -3,8 +3,8 @@ import Loader from 'react-js-loader'
 import { CardActions } from '../../store/CardReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootStateType } from '../../store/rootReducer'
-export default function HOCLoading(Wrapper: React.FC<any>) {
-  function HOC(props: any) {
+export default function ShoppingPageLoader(Wrapper: React.FC<any>) {
+  function Loading(props: any) {
     const { cardDetailsArray } = useSelector(
       (state: RootStateType) => state.card
     )
@@ -45,5 +45,5 @@ export default function HOCLoading(Wrapper: React.FC<any>) {
       </>
     )
   }
-  return HOC
+  return Loading
 }

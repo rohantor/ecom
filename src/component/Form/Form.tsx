@@ -1,12 +1,11 @@
 import { useState, useRef, useMemo } from 'react'
-import style from '../Styles/Form.module.scss'
+import style from './Form.module.scss'
 import { FormValidator } from '../../utils/helper'
 import { useLocation } from 'react-router-dom'
-import { store } from '../../Context/ContextStore'
 import axios from 'axios'
 import Loader from 'react-js-loader'
 import { ProductInterface } from '../../Interface'
-import {useSelector,useDispatch} from 'react-redux'
+import {useDispatch} from 'react-redux'
 
 
 

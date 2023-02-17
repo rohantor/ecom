@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-export default function NFP404() {
+export default function NotFoundPage() {
   const navigator = useNavigate()
   return (
     <>

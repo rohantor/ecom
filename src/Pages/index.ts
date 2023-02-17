@@ -1,7 +1,6 @@
 import AdminPage from "./AdminPage";
-import CartPage from "./CartPage";
-import CartPageTemp from "./CartPageTemp";
+import CartPageTemp from "./CartPage";
 import HomePage from "./HomePage";
 import ShoppingPage from "./ShoppingPage";
 
-export { HomePage, CartPage, AdminPage, ShoppingPage,CartPageTemp } 
+export { HomePage , AdminPage, ShoppingPage,CartPageTemp } 

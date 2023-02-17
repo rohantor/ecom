@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { ProductInterface } from '../Interface'
-import CardTemp from '../component/Card/CardTemp'
-import GridTemplate from '../component/Grid/GridTemp'
+import CardTemp from '../component/Card/ProductCard'
+import GridTemplate from '../component/Grid/Grid'
 import { RootStateType } from '../store/rootReducer'
 import { CardActions } from '../store/CardReducer'
+import { ShoppingPageLoader } from '../component'
+import { nanoid } from 'nanoid'
 
-export default function ShoppingPage() {
+ function ShoppingPage() {
   const { cardDetailsArray } = useSelector((state: RootStateType) => state.card)
   const dispatch = useDispatch()
 
@@ -22,8 +24,12 @@ export default function ShoppingPage() {
         {cardDetailsArray?.map((item: ProductInterface, index: number) => {
           return (
             <CardTemp
-              key={item.id}
-              deleteHandler={{ fn: deleteHandler, identifier: item.id ,resource: 'products'}}
+              key={nanoid()}
+              deleteHandler={{
+                fn: deleteHandler,
+                identifier: item.id,
+                resource: 'products',
+              }}
               title={item.title}
               image={item.image}
               description={item.description}
@@ -38,3 +44,5 @@ export default function ShoppingPage() {
     </>
   )
 }
+
+export default ShoppingPageLoader(ShoppingPage)

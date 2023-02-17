@@ -1,8 +1,9 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import { Header,Individual,NFP404} from './component'
-import { HomePage, AdminPage, CartPage, ShoppingPage, CartPageTemp } from './Pages'
+import { HomePage, AdminPage,  ShoppingPage, CartPageTemp } from './Pages'
 import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 function App() {
   return (
     <div className='App'>

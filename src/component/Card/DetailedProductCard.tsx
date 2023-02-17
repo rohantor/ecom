@@ -1,16 +1,14 @@
 import {  useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import style from './Individual.module.css'
+import style from './DetailedProductCard.module.css'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import Loader from 'react-js-loader'
 import { ProductInterface } from '../../Interface'
-function Individual() {
+function DetailedProductCard() {
   let { index } = useParams()
   const navigate = useNavigate()
-  
 
-   
   const [isLoading, setLoading] = useState(true)
   const [productObject, setProductObject] = useState<ProductInterface>({
     id: 0,
@@ -23,12 +21,12 @@ function Individual() {
   async function getProductDetails(index: string) {
     try {
       // if (cardDetailsArray.length === 0 || cardDetailsArray.length <index) {
-        const res = await fetch(
-          `${process.env.REACT_APP_BASE_URL}products/${index}`
-        )
-        const data = await res.json()
-    
-        return data[0]
+      const res = await fetch(
+        `${process.env.REACT_APP_BASE_URL}products/${index}`
+      )
+      const data = await res.json()
+
+      return data[0]
       // }
       // return cardDetailsArray[index-1]
     } catch (error) {
@@ -40,7 +38,7 @@ function Individual() {
     setLoading(true)
     ;(async () => {
       const dataGet = await getProductDetails(index)
-  
+
       let newObj = {
         id: dataGet.id,
         title: dataGet.title,
@@ -118,4 +116,4 @@ function Individual() {
   )
 }
 
-export default Individual
+export default DetailedProductCard

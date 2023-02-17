@@ -1,4 +1,4 @@
-import { HOCLoading } from '../component'
+import { ShoppingPageLoader } from '../component'
 
 import ShoppingPage from './ShoppingPage'
 export function HomePage() {
@@ -10,4 +10,4 @@ export function HomePage() {
     </>
   )
 }
-export default HOCLoading(HomePage)
+export default ShoppingPageLoader(HomePage)
