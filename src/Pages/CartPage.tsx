@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import GridTemplate from '../component/Grid/Grid'
-import CardTemp from '../component/Card/ProductCard'
+import ProductCard from '../component/Card/ProductCard'
 import { CartProductInterface } from '../Interface'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootStateType } from '../store/rootReducer'
@@ -42,7 +42,7 @@ function CartPage() {
           index: number
         ) => {
           return (
-            <CardTemp
+            <ProductCard
               key={nanoid()}
               deleteHandler={{
                 fn: deleteHandler,

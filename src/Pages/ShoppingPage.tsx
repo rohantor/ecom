@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { ProductInterface } from '../Interface'
-import CardTemp from '../component/Card/ProductCard'
+import ProductCard from '../component/Card/ProductCard'
 import GridTemplate from '../component/Grid/Grid'
 import { RootStateType } from '../store/rootReducer'
 import { CardActions } from '../store/CardReducer'
@@ -23,7 +23,7 @@ import { nanoid } from 'nanoid'
       <GridTemplate>
         {cardDetailsArray?.map((item: ProductInterface, index: number) => {
           return (
-            <CardTemp
+            <ProductCard
               key={nanoid()}
               deleteHandler={{
                 fn: deleteHandler,

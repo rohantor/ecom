@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import { Header,Individual,NFP404} from './component'
-import { HomePage, AdminPage,  ShoppingPage, CartPageTemp } from './Pages'
+import { HomePage, AdminPage,  ShoppingPage, CartPage } from './Pages'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 function App() {
@@ -14,7 +14,7 @@ function App() {
           <Route exact path='/shop/:index/' element={<Individual />} />
 
           <Route path='/admin' element={<AdminPage />}></Route>
-          <Route path='/cart' element={<CartPageTemp />}></Route>
+          <Route path='/cart' element={<CartPage />}></Route>
           <Route path='/*' element={<NFP404 />}></Route>
         </Routes>
       </Header>
