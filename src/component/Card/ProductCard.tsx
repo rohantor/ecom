@@ -4,6 +4,7 @@ import style from './ProductCard.module.css'
 import { notify } from '../Utils/Notify'
 import axios, { AxiosResponse } from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { PENDING_ADD_TO_CART, PENDING_DELETE, SUCCESS_ADD_TO_CART, SUCCESS_DELETE } from '../../constants'
 
 interface Props {
   deleteHandler: { fn: (i: number) => void; identifier: number ,resource: string;}
@@ -55,8 +56,8 @@ export default function ProductCard(props: Props) {
 
     notify(
       getPromise(process.env.REACT_APP_BASE_URL + 'cart/', 'post'),
-      ' Trying to add item to cart',
-      '🛒 Added to cart!👌'
+      PENDING_ADD_TO_CART,
+      SUCCESS_ADD_TO_CART
     )
   }
   const openHandler = () => {
@@ -65,9 +66,12 @@ export default function ProductCard(props: Props) {
   const handleDelete = () => {
    deleteHandler.fn(deleteHandler.identifier)
     notify(
-      getPromise(process.env.REACT_APP_BASE_URL + deleteHandler.resource+'/' + id, 'delete'),
-      ' Trying to delete  ',
-      'Product Deleted !👌'
+      getPromise(
+        process.env.REACT_APP_BASE_URL + deleteHandler.resource + '/' + id,
+        'delete'
+      ),
+      PENDING_DELETE,
+      SUCCESS_DELETE
     )
   }
   const navigate = useNavigate()
