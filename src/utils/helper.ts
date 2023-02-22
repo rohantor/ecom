@@ -18,7 +18,7 @@ export const FormValidator = async (obj: ProductInterface) => {
     Errorobj.description = 'description  can not be empty'
   }
 
-  if (!(await isImgUrl(obj.image))) {
+  if (!(await isValidImgUrl(obj.image))) {
     Errorobj.url = 'image url is  not valid'
   }
   if (
@@ -32,7 +32,7 @@ export const FormValidator = async (obj: ProductInterface) => {
   return Errorobj
 }
 
-function isImgUrl(url: string) {
+function isValidImgUrl(url: string) {
   const img = new Image()
   img.src = url
   return new Promise((resolve) => {
@@ -41,20 +41,3 @@ function isImgUrl(url: string) {
   })
 }
 
-export const CartValueCalculator = (cart: ProductInterface[]): number => {
-  let total = 0
-  for (let i = 0; i < cart.length; i++) {
-    total = total + cart[i].price
-  }
-  return total
-}
-
-export const RemoveFromLocalStorage = (index: number): void => {
-  let temp = JSON.parse(localStorage.getItem('Cart') || '[]')
-  temp.splice(index, 1)
-  localStorage.setItem('Cart', JSON.stringify(temp))
-
-}
-
-
- 
