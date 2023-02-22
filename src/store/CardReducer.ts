@@ -23,7 +23,6 @@ const cardSlice = createSlice({
       }
     },
     SetCards(state, action) {
-      // console.log('set state', state,action)
       return {
         ...state,
         cardDetailsArray: [

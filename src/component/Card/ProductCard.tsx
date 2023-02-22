@@ -1,7 +1,6 @@
 import React, {  useState } from 'react'
 import { Button, CardOuterDiv, H3Price } from './ProductCardStyled'
 import style from './ProductCard.module.css'
-import { useDispatch } from 'react-redux'
 import { notify } from '../Utils/Notify'
 import axios, { AxiosResponse } from 'axios'
 import { useNavigate } from 'react-router-dom'
@@ -32,16 +31,14 @@ export default function ProductCard(props: Props) {
   } = props
   
   const [open, setOpen] = useState(false)
-  const dispatch = useDispatch()
   const handleWhishList = () => {
-    // axios.put(process.env.REACT_APP_BASE_URL + 'products/' + id)
     addToWishListed?.fn(addToWishListed.identifier)
    
   }
   const getPromise = (
     url: string,
     promiseType: string
-  ): Promise<AxiosResponse<any>> => {
+  ): Promise<AxiosResponse<T>> => {
     if (promiseType === 'post') {
       return axios.post(url, {
         id: id,
