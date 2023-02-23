@@ -1,22 +1,33 @@
-
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { ProductInterface } from '../Interface'
-import { Grid } from '../component'
-import CardTemp from '../component/Card/CardTemp'
-import GridTemplate from '../component/Grid/GridTemp'
+import ProductCard from '../component/Card/ProductCard'
+import GridTemplate from '../component/Grid/Grid'
 import { RootStateType } from '../store/rootReducer'
+import { CardActions } from '../store/CardReducer'
+import { ShoppingPageLoader } from '../component'
+import { nanoid } from 'nanoid'
 
-export default function ShoppingPage() {
+ function ShoppingPage() {
   const { cardDetailsArray } = useSelector((state: RootStateType) => state.card)
+  const dispatch = useDispatch()
+
+  const deleteHandler = (id: number) => {
+    dispatch(CardActions.RemoveCard(id))
+  }
+  const addToWishlistHandler = (index: number) => {
+    dispatch(CardActions.Wishlist(index))
+  }
+  
   return (
     <>
       <GridTemplate>
         {cardDetailsArray?.map((item: ProductInterface, index: number) => {
           return (
-            <CardTemp
+            <ProductCard
+              key={nanoid()}
               deleteHandler={{
-                action: 'RemoveCard',
-                value: item.id,
+                fn: deleteHandler,
+                identifier: item.id,
                 resource: 'products',
               }}
               title={item.title}
@@ -25,7 +36,7 @@ export default function ShoppingPage() {
               id={item.id}
               price={item.price}
               wishListed={item.wishListed}
-              addToWishListed={{ action: 'Wishlist', value: index }}
+              addToWishListed={{ fn: addToWishlistHandler, identifier: index }}
             />
           )
         })}
@@ -33,3 +44,5 @@ export default function ShoppingPage() {
     </>
   )
 }
+
+export default ShoppingPageLoader(ShoppingPage)

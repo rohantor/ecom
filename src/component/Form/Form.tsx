@@ -1,27 +1,23 @@
 import { useState, useRef, useMemo } from 'react'
-import style from '../Styles/Form.module.scss'
+import style from './Form.module.scss'
 import { FormValidator } from '../../utils/helper'
 import { useLocation } from 'react-router-dom'
-import { store } from '../../Context/ContextStore'
 import axios from 'axios'
 import Loader from 'react-js-loader'
 import { ProductInterface } from '../../Interface'
-import {useSelector,useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 
-
-
-const Form:React.FC = ()=> {
- 
+const Form: React.FC = () => {
   const dispatch = useDispatch()
   const [isLoading, setLoading] = useState(false)
   const [invalidFormErrors, setFormErrors] = useState({
     title: '',
     image: '',
-    id:'',
+    id: '',
     description: '',
     url: '',
   })
-  
+
   const [newItem, setNewItem] = useState({
     title: '',
     image: '',
@@ -50,26 +46,20 @@ const Form:React.FC = ()=> {
 
   async function PostRequest(product: ProductInterface) {
     setLoading(true)
-     axios
-      .post(process.env.REACT_APP_BASE_URL + 'products', product) 
+    axios
+      .post(process.env.REACT_APP_BASE_URL + 'products', product)
       .then((res) => {
         setLoading(false)
         ClearForm()
-
-        return res.data
-      })
-      .then((value) => {
-        // console.log(value)
       })
       .catch(() => {
         setLoading(false)
-      
-        setFormErrors((prv)=>{
-          prv.id="Id should be unique"
+
+        setFormErrors((prv) => {
+          prv.id = 'Id should be unique'
           return prv
         })
       })
- 
   }
 
   return (
@@ -207,10 +197,8 @@ const Form:React.FC = ()=> {
                 disabled={isLoading}
                 onClick={async () => {
                   const output = await FormValidator(newItem)
-                  
 
                   if (typeof output === 'boolean') {
-                    // console.log(InputRef?.current?.value)
                     await PostRequest(newItem)
                     setFormErrors({
                       title: '',
@@ -220,7 +208,7 @@ const Form:React.FC = ()=> {
                       url: '',
                     })
 
-                    dispatch({ type: 'AddCard',payload: newItem })
+                    dispatch({ type: 'AddCard', payload: newItem })
                   } else {
                     setFormErrors(output)
                   }
@@ -235,6 +223,5 @@ const Form:React.FC = ()=> {
     </>
   )
 }
-
 
 export default Form

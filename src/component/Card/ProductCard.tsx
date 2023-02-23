@@ -1,30 +1,23 @@
 import React, {  useState } from 'react'
-import { Button, CardOuterDiv, H3Price } from '../Styles/CardStyled'
-import style from '../Styles/Card.module.css'
-import { useDispatch } from 'react-redux'
+import { Button, CardOuterDiv, H3Price } from './ProductCardStyled'
+import style from './ProductCard.module.css'
 import { notify } from '../Utils/Notify'
 import axios, { AxiosResponse } from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { PENDING_ADD_TO_CART, PENDING_DELETE, SUCCESS_ADD_TO_CART, SUCCESS_DELETE } from '../../constants'
 
 interface Props {
-  deleteHandler: {
-    action: string
-    resource: string
-    value: number
-  }
+  deleteHandler: { fn: (i: number) => void; identifier: number ,resource: string;}
   title: string
   image: string
   description: string
   id: number
   price: number
   wishListed?: boolean
-  addToWishListed?: {
-    action: string
-    value: number
-  }
+  addToWishListed?: { fn: (i: number) => void; identifier: number }
   addToCart?: () => {}
 }
-export default function CardTemp(props: Props) {
+export default function ProductCard(props: Props) {
   const {
     deleteHandler,
     title,
@@ -37,17 +30,16 @@ export default function CardTemp(props: Props) {
     addToWishListed,
     
   } = props
-
+  
   const [open, setOpen] = useState(false)
-  const dispatch = useDispatch()
   const handleWhishList = () => {
-    axios.put(process.env.REACT_APP_BASE_URL + 'products/' + id)
-    dispatch({ type: addToWishListed?.action, payload: addToWishListed?.value })
+    addToWishListed?.fn(addToWishListed.identifier)
+   
   }
   const getPromise = (
     url: string,
     promiseType: string
-  ): Promise<AxiosResponse<any>> => {
+  ): Promise<AxiosResponse<T>> => {
     if (promiseType === 'post') {
       return axios.post(url, {
         id: id,
@@ -61,21 +53,25 @@ export default function CardTemp(props: Props) {
     } else return axios.get(url)
   }
   const addToCartHandler = () => {
+
     notify(
       getPromise(process.env.REACT_APP_BASE_URL + 'cart/', 'post'),
-      ' Trying to add item to cart',
-      '🛒 Added to cart!👌'
+      PENDING_ADD_TO_CART,
+      SUCCESS_ADD_TO_CART
     )
   }
   const openHandler = () => {
     setOpen((prv) => !prv)
   }
   const handleDelete = () => {
-    dispatch({ type: deleteHandler.action, payload: deleteHandler.value })
+   deleteHandler.fn(deleteHandler.identifier)
     notify(
-      getPromise(process.env.REACT_APP_BASE_URL + deleteHandler.resource+'/' + id, 'delete'),
-      ' Trying tp delete  ',
-      'Product Deleted !👌'
+      getPromise(
+        process.env.REACT_APP_BASE_URL + deleteHandler.resource + '/' + id,
+        'delete'
+      ),
+      PENDING_DELETE,
+      SUCCESS_DELETE
     )
   }
   const navigate = useNavigate()
@@ -97,8 +93,10 @@ export default function CardTemp(props: Props) {
           alt='Logo'
           src={image}
           className={style.Card_img}
+          
           onClick={() => {
-            navigate(`/shop/${id}`)
+
+           typeof wishListed !== 'undefined' && navigate(`/shop/${id}`)
           }}
         />
         {open ? (
