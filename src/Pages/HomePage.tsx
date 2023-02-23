@@ -1,12 +1,13 @@
-import {Grid} from '../component'
-import {HOCLoading} from '../component'
-export  function HomePage() {
+import { ShoppingPageLoader } from '../component'
 
-
+import ShoppingPage from './ShoppingPage'
+export function HomePage() {
   return (
     <>
-      <Grid></Grid>
+      <img style={{ width: '100%' }} src='./Hero.png' alt='' />
+
+      <ShoppingPage />
     </>
   )
 }
-export default HOCLoading(HomePage)
+export default ShoppingPageLoader(HomePage)

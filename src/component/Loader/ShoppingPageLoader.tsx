@@ -1,31 +1,37 @@
 import React, { useEffect, useState } from 'react'
 import Loader from 'react-js-loader'
-
+import { CardActions } from '../../store/CardReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootStateType } from '../../store/rootReducer'
-export default function HOCLoading(Wrapper: React.FC<any>) {
-  function HOC(props: any) {
+import axios, { AxiosError } from 'axios'
+export default function ShoppingPageLoader(Wrapper: React.FC<any>) {
+  function Loading(props: any) {
     const { cardDetailsArray } = useSelector(
       (state: RootStateType) => state.card
     )
-    console.log('init', cardDetailsArray)
+
     const [loading, setLoading] = useState({ text: 'Loading', status: false })
     const dispatch = useDispatch()
 
     useEffect(() => {
-      if(cardDetailsArray?.length === 0) {
+      if (cardDetailsArray?.length === 0) {
         setLoading({ text: 'Loading', status: true })
-
-        fetch(process.env.REACT_APP_BASE_URL + 'products/')
-          .then((res) => res.json())
-          .then((json) => {
-            dispatch({ type: 'SetCards', payload: json })
+        ;(async () => {
+          try {
+            const { data } = await axios.get(
+              process.env.REACT_APP_BASE_URL + 'products/'
+            )
+            dispatch(CardActions.SetCards(data))
             setLoading({ text: 'Loading', status: false })
-          })
-          .catch(() => {
-            console.log("Server Refused to connect to")
-            setLoading({ text: 'Server Refused to connect', status: true })
-          })
+          } catch (error) {
+            if (error instanceof AxiosError) {
+              setLoading({
+                text: `Error :${error.message} Server Refused to connect`,
+                status: true,
+              })
+            }
+          }
+        })()
       }
     }, [])
 
@@ -45,5 +51,5 @@ export default function HOCLoading(Wrapper: React.FC<any>) {
       </>
     )
   }
-  return HOC
+  return Loading
 }

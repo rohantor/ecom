@@ -1,38 +1,35 @@
-import { Route, Router, Routes } from 'react-router-dom'
-import React from 'react'
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
-// import Header from './component/Header/Header'
-// import CartPage from './Pages/CartPage'
-// import HomePage from './Pages/HomePage'
-
-// import Individual from './component/Individual'
-// import NFP404 from './component/Utils/NFP404'
-// import AdminPage from './Pages/AdminPage'
-import { Header,Individual,NFP404} from './component'
-import { HomePage,AdminPage,CartPage } from './Pages'
+import { Header, Individual, NotFound } from './component'
+import { HomePage, AdminPage,  ShoppingPage, CartPage } from './Pages'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 function App() {
   return (
     <div className='App'>
       <Header>
         <Routes>
-          <Route
-            exact
-            path='/'
-            element={
-              <>
-                <img style={{ width: '100%' }} src='./Hero.png' alt='' />
-                <HomePage></HomePage>
-              </>
-            }
-          ></Route>
-          <Route exact path='/shop' element={<HomePage></HomePage>}></Route>
+          <Route exact path='/' element={<HomePage />}></Route>
+          <Route exact path='/shop' element={<ShoppingPage />}></Route>
           <Route exact path='/shop/:index/' element={<Individual />} />
 
-          <Route path='/admin' element={<AdminPage></AdminPage>}></Route>
-          <Route path='/cart' element={<CartPage></CartPage>}></Route>
-          <Route path='/*' element={<NFP404></NFP404>}></Route>
+          <Route path='/admin' element={<AdminPage />}></Route>
+          <Route path='/cart' element={<CartPage />}></Route>
+          <Route path='/*' element={<NotFound />}></Route>
         </Routes>
       </Header>
+      <ToastContainer
+        position='bottom-center'
+        autoClose={500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='colored'
+      />
     </div>
   )
 }

@@ -1,66 +1,51 @@
-import { ProductInterface } from "../Interface"
-interface AddToCard {
-  type: 'AddCard'
-  payload: ProductInterface
-}
-interface SetCards {
-  type: 'SetCards'
-  payload: ProductInterface[]
-}
-interface RemoveCard {
-  type: 'RemoveCard'
-  payload: number
-}
-
-interface Wishlist {
-  type: 'Wishlist'
-  payload: number
-}
-
+import { ProductInterface } from '../Interface'
+import { createSlice, current } from '@reduxjs/toolkit'
 export interface CardState {
   cardDetailsArray: ProductInterface[]
 }
-type ActionType =
-  | SetCards
-  | AddToCard
-  | RemoveCard
-  | Wishlist
-
 const initialState: CardState = {
   cardDetailsArray: [],
 }
 
- const cardsArrayReducer = (state = initialState, action: ActionType) => {
-  if (action.type === 'AddCard') {
-    return {
-      
-      cardDetailsArray: [...state.cardDetailsArray, action.payload],
-    }
-  }
-  if (action.type === 'SetCards') {
-    return {
-      
-      cardDetailsArray: [...state.cardDetailsArray, ...action.payload],
-    }
-  }
-  if (action.type === 'RemoveCard') {
-    return {
-      cardDetailsArray: state.cardDetailsArray.filter(
-        (card) => card.id !== action.payload
-      ),
-    }
-  }
-  if (action.type === 'Wishlist') {
-    let NewArr = state.cardDetailsArray
-
-    NewArr[action.payload].wishListed = !NewArr[action.payload].wishListed
-
-    return {
-     
-      cardDetailsArray: [...NewArr],
-    }
-  }
- 
-  return state
+const AddToCards = (array1: ProductInterface[], array2: ProductInterface[]) => {
+  return [...array1, ...array2]
 }
-export default cardsArrayReducer
+
+const cardSlice = createSlice({
+  name: 'card',
+  initialState: initialState,
+  reducers: {
+    AddCard(state, action) {
+      return {
+        cardDetailsArray: [
+          ...AddToCards(state.cardDetailsArray, [action.payload]),
+        ],
+      }
+    },
+    SetCards(state, action) {
+      return {
+        ...state,
+        cardDetailsArray: [
+          ...AddToCards(state.cardDetailsArray, action.payload),
+        ],
+      }
+    },
+    RemoveCard(state, action) {
+      let temp = [...state.cardDetailsArray]
+      temp.splice(
+        state.cardDetailsArray.findIndex((c) => c.id === action.payload),
+        1
+      )
+      return {
+        cardDetailsArray: [...temp],
+      }
+    },
+    Wishlist(state, action) {
+      state.cardDetailsArray[action.payload].wishListed =
+        !state.cardDetailsArray[action.payload].wishListed
+    },
+  },
+})
+
+export const CardActions = cardSlice.actions
+export default cardSlice

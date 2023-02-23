@@ -1,17 +1,16 @@
-import {  useEffect } from 'react'
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import style from './Individual.module.css'
+import style from './DetailedProductCard.module.css'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import Loader from 'react-js-loader'
-function Individual() {
+import { ProductInterface } from '../../Interface'
+function DetailedProductCard() {
   let { index } = useParams()
   const navigate = useNavigate()
-  
 
-   
   const [isLoading, setLoading] = useState(true)
-  const [productObject, setProductObject] = useState<any>({
+  const [productObject, setProductObject] = useState<ProductInterface>({
     id: 0,
     title: '',
     price: 0,
@@ -19,17 +18,14 @@ function Individual() {
     image: '',
     description: '',
   })
-  async function getProductDetails(index: any) {
+  async function getProductDetails(index: string) {
     try {
-      // if (cardDetailsArray.length === 0 || cardDetailsArray.length <index) {
-        const res = await fetch(
-          `${process.env.REACT_APP_BASE_URL}products/${index}`
-        )
-        const data = await res.json()
-        console.log(data)
-        return data[0]
-      // }
-      // return cardDetailsArray[index-1]
+      const res = await fetch(
+        `${process.env.REACT_APP_BASE_URL}products/${index}`
+      )
+      const data = await res.json()
+
+      return data[0]
     } catch (error) {
       navigate('/NotFound')
     }
@@ -39,7 +35,7 @@ function Individual() {
     setLoading(true)
     ;(async () => {
       const dataGet = await getProductDetails(index)
-      console.log(dataGet)
+
       let newObj = {
         id: dataGet.id,
         title: dataGet.title,
@@ -66,17 +62,6 @@ function Individual() {
           />
         ) : (
           <>
-            <button
-              className={style.ArrowDiv}
-              disabled={index === '1'}
-              onClick={() => {
-                console.log('Clicked')
-                navigate(`/shop/${parseInt(index) - 1}`)
-              }}
-            >
-              {' '}
-              {`<`}{' '}
-            </button>
             <div className={style.secondDiv}>
               <div>
                 <img
@@ -94,21 +79,18 @@ function Individual() {
                 <h4>Description : {productObject.description}</h4>
               </div>
             </div>
-            <button
-              className={style.ArrowDiv}
-              disabled={index === '20'}
-              onClick={() => {
-                navigate(`/shop/${parseInt(index) + 1}`)
-              }}
-            >
-              {' '}
-              {`>`}{' '}
-            </button>
           </>
         )}
       </div>
+      <button
+        onClick={() => {
+          navigate(-1)
+        }}
+      >
+        Go back
+      </button>
     </>
   )
 }
 
-export default Individual
+export default DetailedProductCard
