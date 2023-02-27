@@ -1,5 +1,8 @@
+import axios from 'axios'
 import { ProductInterface } from '../Interface'
-import { createSlice, current } from '@reduxjs/toolkit'
+import { ActionCreator, ThunkAction, createSlice, current } from '@reduxjs/toolkit'
+import { useDispatch } from 'react-redux'
+import store from './store'
 export interface CardState {
   cardDetailsArray: ProductInterface[]
 }
@@ -46,6 +49,19 @@ const cardSlice = createSlice({
     },
   },
 })
+
+export const fetchCards =
+  () =>
+  async (
+    dispatch: (arg10: { payload: any; type: 'card/SetCards' }) => void,
+   
+  ) => {
+    const { data } = await axios.get(
+      process.env.REACT_APP_BASE_URL + 'products/'
+    )
+    console.log(data)
+    dispatch(CardActions.SetCards(data))
+  }
 
 export const CardActions = cardSlice.actions
 export default cardSlice

@@ -5,24 +5,21 @@ import { CartProductInterface } from '../Interface'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootStateType } from '../store/rootReducer'
 import axios, { AxiosError } from 'axios'
-import { CartActions } from '../store/CartReducer'
+import { CartActions, fetchCartItems } from '../store/CartReducer'
 import { nanoid } from 'nanoid'
 import { toast } from 'react-toastify'
+import { useAppDispatch } from '../store/store'
 
 function CartPage() {
   const { cartItems } = useSelector((state: RootStateType) => state.cart)
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const deleteHandler = (index: number) => {
     dispatch(CartActions.RemoveCartItem(index))
   }
   useEffect(() => {
     ;(async () => {
       try {
-        const { data } = await axios.get(
-          process.env.REACT_APP_BASE_URL + 'cart'
-        )
-
-        dispatch(CartActions.SetCart(data))
+        await dispatch(fetchCartItems())
       } catch (err) {
         let errorMessage = ''
         if (err instanceof AxiosError) {
