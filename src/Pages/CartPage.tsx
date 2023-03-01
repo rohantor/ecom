@@ -16,23 +16,25 @@ function CartPage() {
     dispatch(CartActions.RemoveCartItem(index))
   }
   useEffect(() => {
-    ;(async () => {
-      try {
-        const { data } = await axios.get(
-          process.env.REACT_APP_BASE_URL + 'cart'
-        )
+    // ;(async () => {
+    //   try {
+    //     const { data } = await axios.get(
+    //       process.env.REACT_APP_BASE_URL + 'cart'
+    //     )
 
-        dispatch(CartActions.SetCart(data))
-      } catch (err) {
-        let errorMessage = ''
-        if (err instanceof AxiosError) {
-          errorMessage = err.message
-        } else {
-          errorMessage = 'Unexpected error'
-        }
-        toast.error(errorMessage)
-      }
-    })()
+    //     dispatch(CartActions.SetCart(data))
+    //   } catch (err) {
+    //     let errorMessage = ''
+    //     if (err instanceof AxiosError) {
+    //       errorMessage = err.message
+    //     } else {
+    //       errorMessage = 'Unexpected error'
+    //     }
+    //     toast.error(errorMessage)
+    //   }
+    // })()
+
+    dispatch(CartActions.fetchCart())
   }, [])
   return (
     <GridTemplate>

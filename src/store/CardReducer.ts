@@ -15,6 +15,9 @@ const cardSlice = createSlice({
   name: 'card',
   initialState: initialState,
   reducers: {
+    fetchCards(){
+
+    },
     AddCard(state, action) {
       return {
         cardDetailsArray: [

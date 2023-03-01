@@ -15,23 +15,10 @@ export default function ShoppingPageLoader(Wrapper: React.FC<any>) {
 
     useEffect(() => {
       if (cardDetailsArray?.length === 0) {
-        setLoading({ text: 'Loading', status: true })
-        ;(async () => {
-          try {
-            const { data } = await axios.get(
-              process.env.REACT_APP_BASE_URL + 'products/'
-            )
-            dispatch(CardActions.SetCards(data))
-            setLoading({ text: 'Loading', status: false })
-          } catch (error) {
-            if (error instanceof AxiosError) {
-              setLoading({
-                text: `Error :${error.message} Server Refused to connect`,
-                status: true,
-              })
-            }
-          }
-        })()
+        // setLoading({ text: 'Loading', status: true })
+        dispatch(CardActions.fetchCards())
+        // setLoading({ text: 'Loading', status: false })
+
       }
     }, [])
 

@@ -12,6 +12,7 @@ const CartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
+    fetchCart(){},
     SetCart(state, action) {
       return {
         ...state,
