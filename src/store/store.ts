@@ -1,7 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { createStore, applyMiddleware } from 'redux'
-import CardSlice from './CardReducer'
-import CartSlice from './CartReducer'
 import thunk from 'redux-thunk'
 import { rootReducer } from './rootReducer'
 import { useDispatch } from 'react-redux'

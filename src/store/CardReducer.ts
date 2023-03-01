@@ -1,8 +1,7 @@
 import axios from 'axios'
 import { ProductInterface } from '../Interface'
-import { ActionCreator, ThunkAction, createSlice, current } from '@reduxjs/toolkit'
-import { useDispatch } from 'react-redux'
-import store from './store'
+import { createSlice} from '@reduxjs/toolkit'
+
 export interface CardState {
   cardDetailsArray: ProductInterface[]
 }
