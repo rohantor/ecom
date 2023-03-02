@@ -82,23 +82,20 @@ export default function ProductCard(props: Props) {
         <div>
           <H3Price>Price:{price} </H3Price>
           <h3>{title}</h3>
-          <img
-            src='/trash.png'
-            alt='I'
-            style={{ display: 'inline-block' }}
-            onClick={openHandler}
-          />
+          <button style={{ background: 'transparent' }} onClick={openHandler}>
+            <img src='/trash.png' alt='I' style={{ display: 'inline-block' }} />
+          </button>
         </div>
+
         <img
           alt='Logo'
           src={image}
           className={style.Card_img}
-          
           onClick={() => {
-
-           typeof wishListed !== 'undefined' && navigate(`/shop/${id}`)
+            typeof wishListed !== 'undefined' && navigate(`/shop/${id}`)
           }}
         />
+
         {open ? (
           <Button style={{ backgroundColor: 'red' }} onClick={handleDelete}>
             Delete

@@ -2,3 +2,6 @@
   text-align: center;
 }
 
+*:focus:not(.focus-visible) {
+  outline: rgb(255, 0, 0) solid 2px;;
+}

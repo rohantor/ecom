@@ -13,7 +13,7 @@ export const Button = styled.button`
   height: 36px;
   background-color: #2ab821;
   color: black;
-  border: 1px solid rgb(0, 0, 0);
+  border: 1px solid white;
   border-radius: 13px;
 `
 export const H3Price = styled.h3`
